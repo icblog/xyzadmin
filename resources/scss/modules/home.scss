@@ -1,0 +1,26 @@
+.homepage-container {
+	padding: 5rem;
+}
+
+.more-about-me-link-home-page {
+	color: $blackColor;
+	text-decoration: underline;
+
+	font-weight: bold;
+
+	&:hover {
+		color: $darkGreyColor;
+		text-decoration: underline;
+
+	}
+}
+
+@media (max-width: 991.98px) {}
+
+@media (max-width: 767.98px) {}
+
+@media (max-width: 575.98px) {
+	.homepage-container {
+		padding: 4.6rem;
+	}
+}

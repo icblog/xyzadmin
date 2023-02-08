@@ -1,0 +1,133 @@
+.form-wrapper,
+.form-wrapper-contact-form {
+  padding: 2rem;
+  margin-top: 1rem;
+  background-color: $lightGreyColor;
+}
+
+.form-wrapper .primary-btn,
+.form-wrapper-contact-form .primary-btn {
+  width: 100% !important;
+}
+
+.form-wrapper label,
+.form-wrapper-contact-form label {
+  font-weight: 500;
+  color: $darkGreyColor;
+}
+
+.form-wrapper .err-div,
+.form-wrapper-contact-form .err-div-contact-form {
+  display: none;
+}
+
+.saveorpublish {
+  border: 0.1rem solid $lightGreyColor;
+}
+
+.input-error {
+  border-color: $dangerColor !important;
+}
+
+.password-visible-btn {
+  cursor: pointer;
+}
+
+.not_in_my_house {
+  position: absolute;
+  /* don't bother other elements on the page */
+  width: 0;
+  /* small */
+  height: 0;
+  /* very small */
+  margin: 0;
+  /* tiny */
+  padding: 0;
+  /* very tiny */
+  border: 0;
+  /* tada */
+}
+
+.register-stepper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  margin: 0 auto 1.5em;
+
+  &::before {
+    z-index: 0;
+    content: "";
+    display: block;
+    position: absolute;
+    height: 2px;
+    top: calc(50% - 1px);
+    background: $lightGreyColor;
+    width: calc(100% - 20px);
+  }
+}
+
+
+
+
+.step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  border: 2px solid $lightGreyColor;
+  color: $lightGreyColor;
+  background-color: $whiteColor;
+  border-radius: 50%;
+  min-width: 25px;
+  min-height: 25px;
+  line-height: 20px;
+  font-size: 16px;
+
+  &-active {
+    color: $primaryColorDark;
+    border-color: $primaryColorDark;
+  }
+
+  &-done {
+    color: $whiteColor;
+    background-color: $primaryColor;
+    border-color: $primaryColor;
+    opacity: 0.8;
+  }
+
+  &-number {
+
+    font-weight: 800;
+    line-height: 1;
+    vertical-align: middle;
+  }
+}
+
+// Transition SLIDE FADE
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+  display: none;
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+@media (max-width: 991.98px) {}
+
+@media (max-width: 767.98px) {
+
+  .form-wrapper,
+  .form-wrapper-contact-form {
+    margin-top: 0.8rem;
+  }
+}
+
+@media (max-width: 575.98px) {}

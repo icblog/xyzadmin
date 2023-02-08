@@ -1,0 +1,32 @@
+.accordion-trigger {
+  cursor: pointer;
+  background-color: $baseColor;
+  color: $whiteColor;
+  padding: 0.6rem 0.8rem;
+}
+
+.accordion-wrapper {
+  background-color: $whiteColor;
+}
+
+.accordion-content-wrapper {
+  position: relative;
+}
+
+.accordion-content {
+  background-color: $whiteColor;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.expand-enter-active,
+.expand-leave-active {
+  transition: max-height 10s ease;
+  max-height: 600px;
+}
+
+.expand-enter,
+.expand-leave-to {
+  max-height: 0;
+  overflow: hidden;
+}

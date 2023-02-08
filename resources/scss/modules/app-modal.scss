@@ -1,0 +1,37 @@
+.c-modal-back-drop {
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+
+}
+
+.c-modal-wrapper {
+    margin: 60px auto;
+    background-color: $whiteColor;
+    width: 700px;
+    padding: 1rem;
+    max-height: 20rem;
+    overflow-y: auto;
+
+}
+
+@media (max-width: 991.98px) {
+    .c-modal-wrapper {
+        width: 600px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .c-modal-wrapper {
+        width: 560px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .c-modal-wrapper {
+        width: 340px;
+    }
+}

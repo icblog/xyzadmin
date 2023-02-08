@@ -1,0 +1,58 @@
+#main-header .react-responsive-modal-root {
+    top: 2rem;
+}
+
+.search-form-wrapper {
+    min-width: 40rem;
+
+}
+
+.main-search-input-wrapper {
+    position: relative;
+}
+
+.main-search-input-wrapper .main-search-input {
+    padding-left: 2.3rem;
+}
+
+.main-search-input-wrapper .main-search-icon {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.6rem;
+
+}
+
+.main-search-result-wrapper {
+    min-height: 3rem;
+}
+
+.main-search-result-wrapper a {
+    display: block;
+    width: 100%;
+    color: $baseColor;
+    text-decoration: none;
+    background-color: $lighterGreyColor;
+    margin-bottom: 0.5rem;
+    padding: 0.6rem !important;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: none;
+        background-color: $lightGreyColor;
+    }
+
+}
+
+@media (max-width: 991.98px) {}
+
+@media (max-width: 767.98px) {
+    .search-form-wrapper {
+        min-width: 30rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .search-form-wrapper {
+        min-width: 20rem;
+    }
+}
