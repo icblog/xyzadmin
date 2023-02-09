@@ -360,7 +360,7 @@ if($request->totalNewFiles == 0 && $request->existingPostImagesTotal == 0){
      $request->session()->put('redirectLink', route('blog.single',[$newSlug]));
      $request->session()->put('type', "success");
      $request->session()->put('msg', $msg);
-     $request->session()->put('redirectTime', 2000);
+     $request->session()->put('redirectTime', 1000);
      return redirect("/notification");
  } catch (\Exception $e) {
   //If error occure redirect to same page and show system error

@@ -162,18 +162,27 @@ class BlogController extends BaseController{
 
   public function searchPost(Request $request){
 
+      //dd($request->searchedword);
+     $postRes = array();
+     $defaultImgLink = "";
+
     $searchResults =  Post::searchPost($request->searchedword);
 
     if($searchResults["error"]){
         return response()->json([
-                    'error' => $this->returnGenericSystemErrMsg(),
-                    "result" => ""
-        ]);
+                    'error' => $this->returnGenericSystemErrMsg()
+         ]);
     }//End if error
+     // dd($searchResults["searchResult"]);
 
+     if(!empty($searchResults["searchResult"])){
+       $postRes = $searchResults["searchResult"];
+       $defaultImgLink = $this->returnCloudinaryDefaultLink();
+     } 
     return response()->json([
         'error' => "",
-        "result" => $searchResults["searchResult"]
+        'postData' => $postRes,
+        'defaultImgLink' => $defaultImgLink
      ]);
 
   }//End method search

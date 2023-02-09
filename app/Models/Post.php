@@ -262,6 +262,13 @@ public static function searchPost($searchedWord){
 try {
        
   $outComeArray["searchResult"] = DB::table('posts')
+                     //WITH IMAGE
+                // ->select('slug','title',DB::raw('group_concat(DISTINCT I.img_url) as imgUrls'))
+                // ->leftjoin('postimages AS I', function($join){
+                //   $join->on('I.post_id', '=', 'posts.id')
+                //         ->where('I.img_type','=','main');
+                // })
+                //WITHOUT IMAGE
                 ->select('slug','title')
                 ->where([
                   ['title', 'LIKE', "%{$searchedWord}%"],
@@ -276,7 +283,8 @@ try {
 
     return $outComeArray;
 
-  } catch (\Exception $e) { 
+  } catch (\Exception $e) {
+     
     $outComeArray["error"] = true;
     return $outComeArray;
   }

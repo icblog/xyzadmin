@@ -1,10 +1,11 @@
 header {
 	width: 100%;
-	position: relative;
 	z-index: 5;
 	margin: 0 !important;
 	height: 3.4rem;
 	background-color: $lighterGreyColor;
+	position: fixed;
+
 }
 
 header .header-content-wrapper {
@@ -172,10 +173,11 @@ header .header-content-wrapper .right-content-wrapper .hello-user {
 		// PUSH MENU
 		width: 0;
 		position: absolute;
-		top: 4.6rem;
-		left: 0;
+		top: 3.2rem;
+		left: 0.8rem;
 		background-color: $whiteColor;
-		border-top: 0.2rem solid $primaryColor;
+		//border-top: 0.2rem solid $primaryColor;
+		//border-bottom: 0.2rem solid $primaryColor;
 		overflow-x: hidden;
 		transition: 0.5s;
 		box-shadow: 0 0.5rem 1rem 0rem rgba(0, 0, 0, 0.2);
@@ -200,11 +202,14 @@ header .header-content-wrapper .right-content-wrapper .hello-user {
 		margin: 0;
 		transform: rotate(-180deg);
 
+
 	}
+
+
 
 	header .header-content-wrapper .middle-content-wrapper ul li a,
 	.contact-link {
-		color: $darkGreyColor;
+		color: $baseColor;
 		display: block;
 		padding: 0.5rem;
 		padding-left: 0.9rem;
@@ -223,7 +228,7 @@ header .header-content-wrapper .right-content-wrapper .hello-user {
 	//toggle menu on and off class
 
 	.menu-on {
-		min-width: 100%;
+		min-width: 95%;
 	}
 
 	.menu-off {

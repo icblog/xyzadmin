@@ -29,8 +29,15 @@
                     $page.component.toLowerCase() == 'blog/blogsingle'
                   "
                 >
-                  <button type="button" title="Search" class="search-btn" id="search-btn">
-                    <span><i class="fa fa-search"></i></span>
+                  <button
+                    type="button"
+                    title="Search"
+                    class="search-btn"
+                    @click="toggleSearch"
+                  >
+                    <span
+                      ><i :class="isSearchOn ? 'fa fa-times' : 'fa fa-search'"></i
+                    ></span>
                   </button>
                 </li>
 
@@ -39,7 +46,6 @@
                     type="button"
                     title="Open menu"
                     class="menu-btn show-on-mobile hide-on-desktop"
-                    id="small-screen-open-menu-btn"
                     @click="toggleMenu"
                   >
                     <span><i :class="isMenuOn ? 'fas fa-times' : 'fa fa-bars'"></i></span>
@@ -83,7 +89,16 @@
       </div>
       <!-- END ROW -->
     </div>
-    <!-- END CONTAINER FLUID -->
+    <!-- END CONTAINER -->
+    <!-- Blog main search form -->
+
+    <BlogSearch
+      v-show="
+        (isSearchOn && $page.component.toLowerCase() == 'blog/bloghome') ||
+        (isSearchOn && $page.component.toLowerCase() == 'blog/blogsingle')
+      "
+      :isSearchOn="isSearchOn"
+    />
   </header>
 </template>
 <script>
@@ -91,7 +106,7 @@ import AppLink from "./AppLink.vue";
 import Logo from "./Logo";
 import UserNav from "./nav/UserNav";
 import AdminNav from "./nav/AdminNav";
-import Modal from "./Modal.vue";
+import BlogSearch from "../pages/blog/BlogSearch.vue";
 
 export default {
   components: {
@@ -99,16 +114,27 @@ export default {
     Logo,
     UserNav,
     AdminNav,
-    Modal,
+    BlogSearch,
   },
   data() {
     return {
       isMenuOn: false,
+      isSearchOn: false,
     };
   },
   methods: {
     toggleMenu() {
       this.isMenuOn = !this.isMenuOn;
+      if (this.isSearchOn) {
+        this.isSearchOn = false;
+      }
+    },
+
+    toggleSearch() {
+      this.isSearchOn = !this.isSearchOn;
+      if (this.isMenuOn) {
+        this.isMenuOn = false;
+      }
     },
   },
 };
