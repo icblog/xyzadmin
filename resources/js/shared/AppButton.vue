@@ -1,5 +1,6 @@
 <template>
   <button
+    :title="btnTitle"
     :type="btnType"
     :class="{
       'hide-on-all-screen': hideBtn,
@@ -33,6 +34,11 @@ const props = defineProps({
     default: "button",
   },
 
+  btnTitle: {
+    type: String,
+    default: "",
+  },
+
   btnFunc: {
     type: Function,
     default: null,
@@ -54,6 +60,6 @@ const props = defineProps({
 });
 
 const appBtnData = reactive({
-  defaultClassName: "no-border-radius btn " + props.customClass,
+  defaultClassName: "no-border-radius btn shadow-none " + props.customClass,
 });
 </script>

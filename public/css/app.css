@@ -9628,6 +9628,12 @@ textarea:focus,
   color: #000000 !important;
 }
 
+.button:focus {
+  outline: none !important;
+  outline-width: 0 !important;
+  box-shadow: none !important;
+}
+
 .loader {
   text-align: center !important;
 }
@@ -9642,10 +9648,6 @@ textarea:focus,
 
 .loader-dot {
   color: #c2c2c2 !important;
-}
-
-.body404 {
-  padding-top: 8%;
 }
 
 html,
@@ -9664,7 +9666,7 @@ body {
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 75vh;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }

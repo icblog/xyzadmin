@@ -55,6 +55,12 @@ textarea:focus,
 	color: $blackColor !important;
 }
 
+.button:focus {
+	outline: none !important;
+	outline-width: 0 !important;
+	box-shadow: none !important;
+}
+
 .loader {
 	text-align: center !important;
 }
@@ -72,9 +78,6 @@ textarea:focus,
 	color: $midGreyColor !important;
 }
 
-.body404 {
-	padding-top: 8%;
-}
 
 html,
 body {
@@ -94,10 +97,9 @@ body {
 
 
 .content-wrapper {
-
 	display: flex;
 	flex-direction: column;
-	min-height: 75vh;
+	min-height: 100vh;
 	margin: 0;
 	padding: 0;
 }

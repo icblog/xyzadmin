@@ -29,27 +29,25 @@
                     $page.component.toLowerCase() == 'blog/blogsingle'
                   "
                 >
-                  <button
-                    type="button"
-                    title="Search"
-                    class="search-btn"
-                    @click="toggleSearch"
+                  <AppButton
+                    :btnTitle="isSearchOn ? 'Close search' : 'Search'"
+                    customClass="search-btn"
+                    :btnFunc="toggleSearch"
                   >
                     <span
                       ><i :class="isSearchOn ? 'fa fa-times' : 'fa fa-search'"></i
                     ></span>
-                  </button>
+                  </AppButton>
                 </li>
 
                 <li>
-                  <button
-                    type="button"
-                    title="Open menu"
-                    class="menu-btn show-on-mobile hide-on-desktop"
-                    @click="toggleMenu"
+                  <AppButton
+                    :btnTitle="isMenuOn ? 'Close menu' : 'Open menu'"
+                    customClass="menu-btn show-on-mobile hide-on-desktop"
+                    :btnFunc="toggleMenu"
                   >
                     <span><i :class="isMenuOn ? 'fas fa-times' : 'fa fa-bars'"></i></span>
-                  </button>
+                  </AppButton>
                 </li>
 
                 <li
@@ -107,6 +105,7 @@ import Logo from "./Logo";
 import UserNav from "./nav/UserNav";
 import AdminNav from "./nav/AdminNav";
 import BlogSearch from "../pages/blog/BlogSearch.vue";
+import AppButton from "./AppButton.vue";
 
 export default {
   components: {
@@ -115,6 +114,7 @@ export default {
     UserNav,
     AdminNav,
     BlogSearch,
+    AppButton,
   },
   data() {
     return {

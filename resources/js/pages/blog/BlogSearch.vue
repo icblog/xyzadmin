@@ -44,7 +44,8 @@
               v-show="
                 searchData.isSearchComplete &&
                 !searchData.isSearching &&
-                searchData.postData.length <= 0
+                searchData.postData.length <= 0 &&
+                searchedWord != ''
               "
             >
               <div className="text-center pt-3">
@@ -138,9 +139,6 @@ watch(
   searchedWord,
   debounce((value) => {
     handleSearchForm(value);
-    if (value == "") {
-      searchData.postData = {};
-    }
   }, 400)
 );
 </script>

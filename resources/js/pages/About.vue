@@ -180,9 +180,8 @@
                       <div class="box-shadow skill-detail project-detail">
                         <p class="skills-heading-p">Frameworks</p>
                         <span>Laravel/Blade</span> . <span> Bootstrap</span> .
-                        <span> Jquery/Ajax</span> .
-                        <span> React Js</span>
-                        <span> Vue Js</span>
+                        <span> Jquery/Ajax</span> . <span> React Js</span> .
+                        <span> Vue Js</span> .
                         <span> Inertia Js</span>
                       </div>
                     </div>
