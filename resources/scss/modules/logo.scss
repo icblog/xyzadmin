@@ -1,7 +1,8 @@
 .logo-wrapper {
 	padding: 0;
 	margin: 0;
-	margin-top: -1.5rem;
+	//margin-top: -1.5rem;
+	position: relative;
 }
 
 .logo-wrapper a {
@@ -19,20 +20,16 @@
 	}
 }
 
-.logo-dot {
+.logo-wrapper .logo-dot {
 	font-weight: bolder;
 	color: $primaryColor !important;
-	font-size: 3rem;
+	font-size: 4.1rem;
+	position: absolute;
+	left: -0.3rem;
+	top: -3.9rem;
 }
 
-.header-sticky .logo-dot {
-	font-size: 2rem;
-}
 
-.header-sticky .logo-wrapper a {
-	font-size: 1.4rem;
-
-}
 
 @media (max-width: 1280px) {}
 

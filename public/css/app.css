@@ -10091,7 +10091,7 @@ header .header-content-wrapper .right-content-wrapper .hello-user {
 .logo-wrapper {
   padding: 0;
   margin: 0;
-  margin-top: -1.5rem;
+  position: relative;
 }
 
 .logo-wrapper a {
@@ -10108,18 +10108,13 @@ header .header-content-wrapper .right-content-wrapper .hello-user {
   text-decoration: none;
 }
 
-.logo-dot {
+.logo-wrapper .logo-dot {
   font-weight: bolder;
   color: #3466F6 !important;
-  font-size: 3rem;
-}
-
-.header-sticky .logo-dot {
-  font-size: 2rem;
-}
-
-.header-sticky .logo-wrapper a {
-  font-size: 1.4rem;
+  font-size: 4.1rem;
+  position: absolute;
+  left: -0.3rem;
+  top: -3.9rem;
 }
 
 .form-wrapper,
@@ -10714,6 +10709,14 @@ footer {
     margin-bottom: 1rem;
   }
 }
+.admin-catgory-result-wrapper {
+  min-height: 10rem;
+}
+
+.admin-catgory-result-wrapper-form-input input:focus {
+  background-color: #ffffff !important;
+}
+
 .category-form-group-wrapper {
   position: relative;
 }

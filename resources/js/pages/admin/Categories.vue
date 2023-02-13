@@ -23,133 +23,150 @@
                 <!-- Add new category form -->
                 <NewCategoryform />
                 <div class="form-wrapper">
-                  <p>Already saved categories</p>
                   <div
-                    v-if="reactiveData.categoriesResult.length > 0"
+                    v-if="reactiveData.oldCategoriesData.length > 0"
                     ref="loadMoreIntersect"
+                    class="admin-catgory-result-wrapper"
                   >
-                    <div
-                      v-for="(category, index) in reactiveData.categoriesResult"
-                      :class="{
-                        'admin-category-detail-wrapper p-2 box-shadow mb-4': true,
-                        'admin-category-detail-wrapper-active': returnIfInputIsActive(
-                          category.id
-                        ),
-                      }"
-                      :key="category.id"
-                    >
-                      <div
-                        class="small text-danger"
-                        v-if="showErrMsgIfNotEmpty(category.id)"
-                      >
-                        {{ reactiveData.customErr }}
-                      </div>
-                      <div class="input-group">
-                        <input
-                          ref="categoriesResultInput"
-                          :value="
-                            returnIfInputIsActive(category.id)
-                              ? reactiveData.categoryTobeProcessNewValue
-                              : category.name
-                          "
-                          :type="returnIfInputIsActive(category.id) ? 'text' : 'button'"
-                          @input="handleCategoryInputChange"
-                          @focus="hideCustomErrorOnFocus"
-                          :class="{
-                            'form-control admin-all-category-input': true,
-                            'admin-all-category-input-active mb-1': returnIfInputIsActive(
-                              category.id
-                            ),
-                          }"
-                        />
-                        <div class="input-group-append">
-                          <span v-if="returnIfInputIsActive(category.id)">
-                            <!-- Okay button -->
-                            <AppButton
-                              btnStyle="success"
-                              :btnFunc="() => handleUpdateCategory(category.id, index)"
-                            >
-                              <span v-if="returnIfCategoryIsEditing(category.id)"
-                                >Processing....</span
-                              >
-                              <span
-                                v-else-if="returnIfCategoryEditsuccess(category.id)"
-                                >{{ reactiveData.customSuccess }}</span
-                              >
-                              <span v-else><i class="fas fa-check"></i></span>
-                            </AppButton>
-                            <!-- Cancel button -->
-                            <AppButton
-                              btnStyle="warn"
-                              :hideBtn="hideCancelBtn(category.id)"
-                              :btnFunc="handleCancelBtn"
-                            >
-                              <span><i class="fas fa-times"></i></span>
-                            </AppButton>
-                          </span>
-                          <span v-else>
-                            <!-- Edit button -->
-                            <AppButton
-                              btnStyle="primary2"
-                              :hideBtn="
-                                returnIfCategoryIsDeleting(category.id) ||
-                                returnIfCategoryIsDeleteSuccess(category.id)
-                              "
-                              :btnFunc="
-                                () => handleEditBtn(index, category.id, category.name)
-                              "
-                            >
-                              <span><i class="fas fa-edit"></i></span>
-                            </AppButton>
-                            <!-- Delete button -->
-                            <AppButton
-                              :btnStyle="
-                                returnIfCategoryIsDeleting(category.id)
-                                  ? 'secondary'
-                                  : returnIfCategoryIsDeleteSuccess(category.id)
-                                  ? 'success'
-                                  : 'danger'
-                              "
-                              :btnFunc="
-                                () => handleDeleteCategoryYes(category.id, category.name)
-                              "
-                            >
-                              <span v-if="returnIfCategoryIsDeleting(category.id)"
-                                >Processing...</span
-                              >
-
-                              <span
-                                v-else-if="returnIfCategoryIsDeleteSuccess(category.id)"
-                                >{{ reactiveData.customSuccess }}</span
-                              >
-                              <span v-else><i class="fas fa-trash"></i></span>
-                            </AppButton>
-                          </span>
-                        </div>
-                      </div>
-                      <p>
-                        Created date:
-                        <span className="admin-detail-value-span">{{
-                          category.created_at
-                        }}</span
-                        ><br />
-                        Created by:
-                        <span className="admin-detail-value-span">{{
-                          category.createdby_name
-                        }}</span
-                        ><br />
-                        Updated date:
-                        <span className="admin-detail-value-span">{{
-                          category.updated_at == category.created_at
-                            ? "---"
-                            : category.updated_at
-                        }}</span
-                        ><br />
-                        Updated by: <span className="admin-detail-value-span"></span
-                        ><br />
-                      </p>
+                    <h5 class="pb-2">Already saved categories</h5>
+                    <!-- Filter category -->
+                    <div class="admin-catgory-result-wrapper-form-input">
+                      <LocalSearch
+                        :oldResultObj="reactiveData.oldCategoriesData"
+                        whatToCheck="name"
+                        @updateCategoriesResult="returnFilteredCategoriesResult"
+                      />
                     </div>
+
+                    <section v-if="reactiveData.categoriesResult.length > 0">
+                      <div
+                        v-for="(category, index) in reactiveData.categoriesResult"
+                        :class="{
+                          'admin-category-detail-wrapper p-2 box-shadow mb-4': true,
+                          'admin-category-detail-wrapper-active': returnIfInputIsActive(
+                            category.id
+                          ),
+                        }"
+                        :key="category.id"
+                      >
+                        <div
+                          class="small text-danger"
+                          v-if="showErrMsgIfNotEmpty(category.id)"
+                        >
+                          {{ reactiveData.customErr }}
+                        </div>
+                        <div class="input-group">
+                          <input
+                            ref="categoriesResultInput"
+                            :value="
+                              returnIfInputIsActive(category.id)
+                                ? reactiveData.categoryTobeProcessNewValue
+                                : category.name
+                            "
+                            :type="returnIfInputIsActive(category.id) ? 'text' : 'button'"
+                            @input="handleCategoryInputChange"
+                            @focus="hideCustomErrorOnFocus"
+                            :class="{
+                              'form-control admin-all-category-input': true,
+                              'admin-all-category-input-active mb-1': returnIfInputIsActive(
+                                category.id
+                              ),
+                            }"
+                          />
+                          <div class="input-group-append">
+                            <span v-if="returnIfInputIsActive(category.id)">
+                              <!-- Okay button -->
+                              <AppButton
+                                btnStyle="success"
+                                :btnFunc="() => handleUpdateCategory(category.id, index)"
+                              >
+                                <span v-if="returnIfCategoryIsEditing(category.id)"
+                                  >Processing....</span
+                                >
+                                <span
+                                  v-else-if="returnIfCategoryEditsuccess(category.id)"
+                                  >{{ reactiveData.customSuccess }}</span
+                                >
+                                <span v-else><i class="fas fa-check"></i></span>
+                              </AppButton>
+                              <!-- Cancel button -->
+                              <AppButton
+                                btnStyle="warn"
+                                :hideBtn="hideCancelBtn(category.id)"
+                                :btnFunc="handleCancelBtn"
+                              >
+                                <span><i class="fas fa-times"></i></span>
+                              </AppButton>
+                            </span>
+                            <span v-else>
+                              <!-- Edit button -->
+                              <AppButton
+                                btnStyle="primary2"
+                                :hideBtn="
+                                  returnIfCategoryIsDeleting(category.id) ||
+                                  returnIfCategoryIsDeleteSuccess(category.id)
+                                "
+                                :btnFunc="
+                                  () => handleEditBtn(index, category.id, category.name)
+                                "
+                              >
+                                <span><i class="fas fa-edit"></i></span>
+                              </AppButton>
+                              <!-- Delete button -->
+                              <AppButton
+                                :btnStyle="
+                                  returnIfCategoryIsDeleting(category.id)
+                                    ? 'secondary'
+                                    : returnIfCategoryIsDeleteSuccess(category.id)
+                                    ? 'success'
+                                    : 'danger'
+                                "
+                                :btnFunc="
+                                  () =>
+                                    handleDeleteCategoryYes(category.id, category.name)
+                                "
+                              >
+                                <span v-if="returnIfCategoryIsDeleting(category.id)"
+                                  >Processing...</span
+                                >
+
+                                <span
+                                  v-else-if="returnIfCategoryIsDeleteSuccess(category.id)"
+                                  >{{ reactiveData.customSuccess }}</span
+                                >
+                                <span v-else><i class="fas fa-trash"></i></span>
+                              </AppButton>
+                            </span>
+                          </div>
+                        </div>
+                        <p>
+                          Created date:
+                          <span className="admin-detail-value-span">{{
+                            category.created_at
+                          }}</span
+                          ><br />
+                          Created by:
+                          <span className="admin-detail-value-span">{{
+                            category.createdby_name
+                          }}</span
+                          ><br />
+                          Updated date:
+                          <span className="admin-detail-value-span">{{
+                            category.updated_at == category.created_at
+                              ? "---"
+                              : category.updated_at
+                          }}</span
+                          ><br />
+                          Updated by: <span className="admin-detail-value-span"></span
+                          ><br />
+                        </p>
+                      </div>
+                    </section>
+                    <section v-else>
+                      <HandleMsg infotype="info" msg="No category found" />
+                    </section>
                   </div>
+
                   <!-- loadmore result here -->
                   <span ref="loadMoreCategoryIntersect" />
                   <div v-if="reactiveData.isPaginating" class="text-center pt-4 pb-4">
@@ -172,7 +189,9 @@ import AppLink from "../../shared/AppLink.vue";
 import AppButton from "../../shared/AppButton.vue";
 import Layout from "../../shared/Layout";
 import LoadingIndicator from "../../shared/LoadingIndicator.vue";
+import HandleMsg from "../../shared/HandleMsg.vue";
 import NewCategoryform from "./NewCategoryForm.vue";
+import LocalSearch from "../../shared/LocalSearch.vue";
 import axios from "../../api/axios";
 import { removeItemFromArrOrObjByValue, returnSystemErrorMsg } from "../../helper/util";
 
@@ -189,6 +208,7 @@ const props = defineProps({
 
 const reactiveData = reactive({
   categoriesResult: props.categoriesResult?.data,
+  oldCategoriesData: props.categoriesResult?.data,
   categoryTobeProcessId: "",
   categoryTobeProcessNewValue: "",
   categoryTobeProcessOldValue: "",
@@ -201,7 +221,16 @@ const reactiveData = reactive({
   deleting: false,
   categoryDeleted: false,
   pageNumber: 1,
+  localSearchInprogress: false,
 });
+
+const returnFilteredCategoriesResult = ({ arrObj, newValue }) => {
+  reactiveData.localSearchInprogress = true;
+  if (newValue == "") {
+    reactiveData.localSearchInprogress = false;
+  }
+  reactiveData.categoriesResult = arrObj;
+};
 
 const handleCancelBtn = () => {
   reactiveData.categoryTobeProcessId = "";
@@ -333,6 +362,7 @@ const handleUpdateCategory = async (categoryId, index) => {
         setTimeout(() => {
           handleCancelBtn();
           reactiveData.categoriesResult[index] = res?.data?.updatedCategoryRecord[0];
+          reactiveData.oldCategoriesData = reactiveData.categoriesResult;
         }, 1000);
       } else {
         //Set error message
@@ -349,32 +379,35 @@ const handleUpdateCategory = async (categoryId, index) => {
 };
 
 const loadMoreCategories = () => {
-  if (props.categoriesResult.next_page_url === null) {
-    return;
-  }
-
-  router.get(
-    props.categoriesResult.next_page_url,
-    {},
-    {
-      preserveState: true,
-      preserveScroll: true,
-      only: ["categoriesResult"],
-      onStart: () => {
-        reactiveData.isPaginating = true;
-      },
-      onFinish: () => {
-        reactiveData.isPaginating = false;
-      },
-      onSuccess: () => {
-        window.history.replaceState({}, "", reactiveData.initialUrl);
-        reactiveData.categoriesResult = [
-          ...reactiveData.categoriesResult,
-          ...props.categoriesResult?.data,
-        ];
-      },
+  if (!reactiveData.localSearchInprogress) {
+    if (props.categoriesResult.next_page_url === null) {
+      return;
     }
-  );
+
+    router.get(
+      props.categoriesResult.next_page_url,
+      {},
+      {
+        preserveState: true,
+        preserveScroll: true,
+        only: ["categoriesResult"],
+        onStart: () => {
+          reactiveData.isPaginating = true;
+        },
+        onFinish: () => {
+          reactiveData.isPaginating = false;
+        },
+        onSuccess: () => {
+          window.history.replaceState({}, "", reactiveData.initialUrl);
+          reactiveData.categoriesResult = [
+            ...reactiveData.categoriesResult,
+            ...props.categoriesResult?.data,
+          ];
+          reactiveData.oldCategoriesData = reactiveData.categoriesResult;
+        },
+      }
+    );
+  }
 };
 
 const handleDeleteCategoryYes = (categoryId, categoryname) => {
@@ -404,6 +437,8 @@ const handleDeleteCategoryYes = (categoryId, categoryname) => {
               "id",
               "obj"
             );
+
+            reactiveData.oldCategoriesData = reactiveData.categoriesResult;
           }, 1000);
         } else {
           //Set error meg

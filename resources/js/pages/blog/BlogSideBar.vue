@@ -3,56 +3,45 @@
     <div class="side-bar-details-wrapper">
       <section class="mb-5" v-if="categoriesResult.length > 0">
         <h5>Categories</h5>
-        <div class="input-group sidebar-search-category-input-wrapper mb-3 mt-4">
-          <span class="sidebar-search-category-icon-search">
-            <i class="fas fa-search"></i>
-          </span>
-          <input
-            type="text"
-            class="form-control sidebar-search-category-input"
-            placeholder="Search category"
-            v-model="filterText"
-          />
-          <span
-            v-if="filterText.length > 0"
-            class="sidebar-search-category-icon-times"
-            @click="clearCategoryFilterInput"
-          >
-            <i class="fas fa-times"></i>
-          </span>
-        </div>
-        <div class="sidebar-category-wrapper">
-          <div
-            v-for="(category, index) in returnFilteredText(
-              filterText,
-              categoriesResult,
-              'name'
-            )"
-            :key="index"
-          >
-            <div class="sidebar-category-link-wrapper">
-              <span
-                v-if="replaceChar(category.name.toLowerCase(), ' ', '-') === requestSlug"
-              >
-                <span class="sidebar-category-span">
-                  {{ category.name }} ({{ category.categoryPostTotal }})
-                </span>
-              </span>
+        <!-- Filter category -->
+        <LocalSearch
+          :oldResultObj="categoriesResult"
+          whatToCheck="name"
+          @updateCategoriesResult="returnFilteredCategoriesResult"
+        />
 
-              <span v-else>
-                <AppLink
-                  :linkUrl="`/blog/category/${replaceChar(
-                    category.name.toLowerCase(),
-                    ' ',
-                    '-'
-                  )}`"
-                  ><span class="sidebar-category-span"
-                    >{{ category.name }} ({{ category.categoryPostTotal }})</span
-                  ></AppLink
+        <div class="sidebar-category-wrapper">
+          <section v-if="categoriesResultData.length > 0">
+            <div v-for="(category, index) in categoriesResultData" :key="index">
+              <div class="sidebar-category-link-wrapper">
+                <span
+                  v-if="
+                    replaceChar(category.name.toLowerCase(), ' ', '-') === requestSlug
+                  "
                 >
-              </span>
+                  <span class="sidebar-category-span">
+                    {{ category.name }} ({{ category.categoryPostTotal }})
+                  </span>
+                </span>
+
+                <span v-else>
+                  <AppLink
+                    :linkUrl="`/blog/category/${replaceChar(
+                      category.name.toLowerCase(),
+                      ' ',
+                      '-'
+                    )}`"
+                    ><span class="sidebar-category-span"
+                      >{{ category.name }} ({{ category.categoryPostTotal }})</span
+                    ></AppLink
+                  >
+                </span>
+              </div>
             </div>
-          </div>
+          </section>
+          <section v-else>
+            <span class="sidebar-category-span"> No category found </span>
+          </section>
         </div>
         <hr />
       </section>
@@ -89,14 +78,16 @@
 import AppLink from "../../shared/AppLink.vue";
 import HandleMsg from "../../shared/HandleMsg.vue";
 import SideBarPostCard from "./SideBarPostCard.vue";
-import { replaceChar, returnFilteredText } from "../../helper/util";
+import LocalSearch from "../../shared/LocalSearch.vue";
+import { replaceChar } from "../../helper/util";
 
 export default {
-  components: { HandleMsg, AppLink, SideBarPostCard },
+  components: { HandleMsg, AppLink, SideBarPostCard, LocalSearch },
 
   data() {
     return {
       filterText: "",
+      categoriesResultData: this.categoriesResult,
     };
   },
 
@@ -121,9 +112,8 @@ export default {
   },
   methods: {
     replaceChar,
-    returnFilteredText,
-    clearCategoryFilterInput() {
-      this.filterText = "";
+    returnFilteredCategoriesResult({ arrObj }) {
+      this.categoriesResultData = arrObj;
     },
   },
 };
