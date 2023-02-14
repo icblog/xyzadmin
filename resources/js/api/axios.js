@@ -4,7 +4,7 @@ import axios from "axios";
 
 let baseApiUrl = 'http://127.0.0.1:8000';
 if (appDataObj.appEnv === "remote") {
-    baseApiUrl = 'https://icblog.42web.io';
+    baseApiUrl = 'https://icblog.uk';
 }
 export default axios.create({
     baseURL: baseApiUrl,
