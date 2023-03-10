@@ -18,22 +18,50 @@
               v-show="
                 searchData.isSearchComplete &&
                 !searchData.isSearching &&
-                searchData.postData.length > 0
+                searchData.postResData.length > 0
               "
             >
               <p className="text-center number-result-found-p">
                 {{
-                  searchData.postData.length > 1
-                    ? "(" + searchData.postData.length + ") results "
-                    : "(" + searchData.postData.length + ") result "
+                  searchData.postResData.length > 1
+                    ? "(" + searchData.postResData.length + ") post results "
+                    : "(" + searchData.postResData.length + ") post result "
                 }}
                 found
               </p>
 
-              <div v-for="(postEntry, index) in searchData.postData" :key="index">
+              <div v-for="(postEntry, index) in searchData.postResData" :key="index">
                 <p class="post-entry-title">
                   <AppLink :linkUrl="`/blog/${postEntry.slug}`">
                     {{ limitString(60, postEntry.title) }}
+                  </AppLink>
+                </p>
+              </div>
+            </section>
+
+            <section
+              v-show="
+                searchData.isSearchComplete &&
+                !searchData.isSearching &&
+                searchData.categoryResData.length > 0
+              "
+            >
+              <p className="text-center number-result-found-p">
+                {{
+                  searchData.categoryResData.length > 1
+                    ? "(" + searchData.categoryResData.length + ") category results "
+                    : "(" + searchData.categoryResData.length + ") category result "
+                }}
+                found
+              </p>
+
+              <div
+                v-for="(categoryEntry, index) in searchData.categoryResData"
+                :key="index"
+              >
+                <p class="post-entry-title">
+                  <AppLink :linkUrl="`/blog/category/${categoryEntry.slug}`">
+                    {{ limitString(60, categoryEntry.name) }}
                   </AppLink>
                 </p>
               </div>
@@ -44,7 +72,8 @@
               v-show="
                 searchData.isSearchComplete &&
                 !searchData.isSearching &&
-                searchData.postData.length <= 0 &&
+                searchData.postResData.length <= 0 &&
+                searchData.categoryResData.length <= 0 &&
                 searchedWord != ''
               "
             >
@@ -88,7 +117,8 @@ const searchData = reactive({
   isSearchComplete: false,
   customErr: "",
   defaultImgLink: "",
-  postData: {},
+  postResData: [],
+  categoryResData: [],
 });
 
 const handleSearchForm = async (searchedWordValue) => {
@@ -107,8 +137,9 @@ const handleSearchForm = async (searchedWordValue) => {
       if (res?.data?.error != "") {
         searchData.customErr = res.data.error;
       } else {
-        searchData.postData = res.data.postData;
-        searchData.defaultImgLink = res.data.defaultImgLink;
+        searchData.categoryResData = res?.data?.categoryResData;
+        searchData.postResData = res?.data?.postResData;
+        searchData.defaultImgLink = res?.data?.defaultImgLink;
       }
     } catch (err) {
       searchData.customErr = returnSystemErrorMsg();
@@ -130,7 +161,7 @@ watchEffect(() => {
     }, 50);
   } else {
     searchedWord.value = "";
-    searchData.postData = [];
+    searchData.postResData = [];
   }
 });
 

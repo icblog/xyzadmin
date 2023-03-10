@@ -53,7 +53,7 @@
           :defaultImgLink="defaultImgLink"
           :limitStringFunc="limitStringFunc"
         />
-        <div class="text-center pt-1 pb-4">
+        <div class="pt-1 pb-5">
           <AppLink linkUrl="/blog/post/popular"> View all popular </AppLink>
         </div>
       </section>
@@ -66,7 +66,7 @@
           :defaultImgLink="defaultImgLink"
           :limitStringFunc="limitStringFunc"
         />
-        <div class="text-center pt-1 pb-4">
+        <div class="pt-1 pb-4">
           <AppLink linkUrl="/blog/post/latest"> View all latest </AppLink>
         </div>
       </section>

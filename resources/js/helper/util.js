@@ -6,8 +6,6 @@ export const isArray = (what) => {
   return Object.prototype.toString.call(what) === "[object Array]";
 };
 
-
-
 export const returnSystemErrorMsg = () => {
   return "Sorry system error, your request can not be processed please try again later thank you";
 };
@@ -25,7 +23,7 @@ export function limitString(limitBy, str) {
 }
 
 export function scrollToElement(elementRef) {
-  elementRef.current.scrollIntoView();
+  elementRef.value.scrollIntoView({ behavior: "smooth" });
 }
 
 export function scrollToTopOfPage() {
@@ -90,6 +88,7 @@ export function returnFormattedDate(dateParam) {
   return new Date(dateParam).toLocaleDateString();
 }
 export function toSqlDatetime(inputDate) {
+  // input looks like this { new Date()};
   const date = new Date(inputDate);
   const dateWithOffest = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
   return dateWithOffest.toISOString().slice(0, 19).replace("T", " ");
@@ -114,4 +113,30 @@ export function returnFilteredText(text, listObj, filterBy) {
   );
 }
 
+export function capitalizeFirstLetter(string) {
+  return string[0].toUpperCase() + string.slice(1);
+}
 
+export function returnMatchedFromArrOrObjByValue(
+  itemValue,
+  arrOrObj,
+  itemValueKeyName = "",
+  isArrOrObj = "obj"
+) {
+  let filteredArray = [];
+  if (isArrOrObj == "arr") {
+    filteredArray = arrOrObj.filter(function (e) {
+      return e == itemValue;
+    });
+  } else {
+    filteredArray = arrOrObj.filter(function (e) {
+      return e[itemValueKeyName] == itemValue;
+    });
+  }
+  return filteredArray;
+}
+
+export function moveCursorToTextEnd(input, inputValue) {
+  let textEnd = inputValue.length;
+  setTimeout(() => input.setSelectionRange(textEnd, textEnd));
+}

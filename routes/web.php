@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
@@ -42,9 +41,6 @@ Route::get('/notification',[NotificationController::class, 'index'])->name("noti
 // ==========RESUME ROUTE===========//
 Route::get('/resume',[ResumeController::class, 'index'])->name("resume.index");
 
-// ==========ABOUT US ROUTE===========//
-Route::get('/about',[AboutController::class, 'index'])->name("about.index");
-
 // ==========CONTACT ROUTE===========//
 Route::get('/contact',[ContactController::class, 'index'])->name("contact.index");
 Route::post('/handle-contact',[ContactController::class, 'handleContact'])->name("handle.contact");
@@ -84,11 +80,11 @@ Route::post('/handle-reset-password',[ResetPasswordController::class, 'update'])
 Route::post('/blog/search-post',[BlogController::class, 'searchPost'])->name("blog.search");
 Route::get('/blog/{action}/{slug}',[BlogController::class, 'index'])->name("blog.index");
 Route::get('/blog/{postslug}',[BlogController::class, 'single'])->name("blog.single");
-
-
-
-
-
+Route::post('/blog/fetch-comment-replies',[BlogController::class, 'fetchCommentReplies'])->name("blog.fetchCommentReplies");
+Route::post('/blog/save-comment',[BlogController::class, 'saveComment'])->name("blog.saveComment");
+Route::post('/blog/save-comment-reply',[BlogController::class, 'saveCommentReply'])->name("blog.saveCommentReply");
+Route::post('/blog/check-reply-already-exit',[BlogController::class, 'checkReplyAlreadyExit'])->name("blog.checkReplyAlreadyExit");
+Route::post('/blog/update-or-delete-reply',[BlogController::class, 'updateOrDeleteCommentReply'])->name("blog.updateOrDeleteCommentReply");
 
 
 // ==========ADMIN  POST ROUTE===========//

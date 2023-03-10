@@ -14,10 +14,6 @@
   <li v-if="$page.component.toLowerCase() != 'resume'">
     <AppLink linkUrl="/resume" className="header-nav-link"> Resume </AppLink>
   </li>
-
-  <li v-if="$page.component.toLowerCase() != 'about'">
-    <AppLink linkUrl="/about" className="header-nav-link"> About </AppLink>
-  </li>
 </template>
 
 <script setup>

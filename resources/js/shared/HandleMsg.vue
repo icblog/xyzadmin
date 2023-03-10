@@ -1,7 +1,9 @@
 <template>
   <div :class="classValue" aria-live="assertive">
+  <span v-show="showHeading">
     <strong>{{ msgHeading }}</strong
     ><br />
+  </span>
     <span v-html="props.msg"></span>
     <!-- {{ props.msg }} -->
   </div>
@@ -35,6 +37,11 @@ const props = defineProps({
   msg: {
     type: String,
     requred: true,
+  },
+
+  showHeading: {
+    type: Boolean,
+    default: true,
   },
 });
 </script>

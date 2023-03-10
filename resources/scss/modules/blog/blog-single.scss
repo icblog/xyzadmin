@@ -1,8 +1,6 @@
 .single-post-details-wrapper {
     background-color: $whiteColor;
     padding: 0 !important;
-
-
 }
 
 .single-post-details-wrapper .post-main-img {
@@ -25,13 +23,10 @@
     font-size: 0.8rem;
 }
 
-
 .next-prev-link-inner-wrapper {
     background-color: $lightGreyColor;
     padding: 0.8rem;
-
 }
-
 
 .next-prev-link-inner-wrapper a {
     text-decoration: none;
@@ -41,7 +36,6 @@
     &:hover {
         color: $blackColor;
     }
-
 }
 
 .next-prev-link-inner-wrapper a p {
@@ -49,35 +43,26 @@
 }
 
 
-
-
-
 @media (max-width: 991.98px) {
-
     .single-post-details-wrapper {
-
         padding-bottom: 0;
-
     }
 
     .single-post-title {
         font-size: 2.5rem;
         padding-top: 1rem;
         margin-bottom: 1rem;
-
     }
+
 
 }
 
 @media (max-width: 767.98px) {
-
     .single-post-title {
         font-size: 2rem;
         padding-top: 0.8rem;
         margin-bottom: 0.8rem;
-
     }
-
 
 
 }

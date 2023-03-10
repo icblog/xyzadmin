@@ -57,7 +57,7 @@
                   "
                 >
                   <span class="account-link">
-                    <div class="dropdown">
+                    <div class="dropdown mt-2">
                       <a href="/user/profile" title="Account" class="hello-user">
                         <i class="fa fa-user"></i>
                       </a>

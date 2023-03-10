@@ -274,10 +274,10 @@ try {
                   ['title', 'LIKE', "%{$searchedWord}%"],
                   ['status', '=', 'published'],
                 ])
-                ->orWhere([
-                  ['body', 'LIKE', "%{$searchedWord}%"],
-                  ['status', '=', 'published'],
-                ])
+                // ->orWhere([
+                //   ['body', 'LIKE', "%{$searchedWord}%"],
+                //   ['status', '=', 'published'],
+                // ])
                ->limit(10)
                ->get();
 
@@ -290,5 +290,8 @@ try {
   }
  
 }//End searchPost
+
+
+
 
 }//End class

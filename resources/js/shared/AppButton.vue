@@ -1,5 +1,6 @@
 <template>
   <button
+    v-show="!noBtnStyle"
     :title="btnTitle"
     :type="btnType"
     :class="{
@@ -19,12 +20,23 @@
   >
     <slot />
   </button>
+  <button
+    :class="customClassObj != null ? customClassObj : customClass"
+    v-show="noBtnStyle"
+    @click="btnFunc"
+  >
+    <slot />
+  </button>
 </template>
 
 <script setup>
 import { reactive } from "vue";
 
 const props = defineProps({
+  noBtnStyle: {
+    type: Boolean,
+    default: false,
+  },
   btnStyle: {
     type: String,
     default: "default",
@@ -56,6 +68,10 @@ const props = defineProps({
   customClass: {
     type: String,
     default: "",
+  },
+  customClassObj: {
+    type: Object,
+    default: null,
   },
 });
 

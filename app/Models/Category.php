@@ -89,7 +89,30 @@ public static function fetchCategories($resultPerPage=0, $isAdmin=false, $defaul
           return $outComeArray;
         }
 
-    }//End fetchCategoriesWithCount
+}//End fetchCategoriesWithCount
+
+public static function searchCategory($searchedWord){
+  $outComeArray = array("error"=>false, "searchResult"=> []);
+
+try {
+       
+  $outComeArray["searchResult"] = DB::table('categories')
+                ->select('slug','name')
+                ->where('name', 'LIKE', "%{$searchedWord}%")
+                ->limit(10)
+                ->get();
+
+    return $outComeArray;
+
+  } catch (\Exception $e) {
+    //dd($e);
+    $outComeArray["error"] = true;
+    return $outComeArray;
+  }
+ 
+}//End searchPost
+
+
 
 }
 

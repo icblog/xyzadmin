@@ -183,7 +183,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { router } from "@inertiajs/vue3";
 import AppLink from "../../shared/AppLink.vue";
 import AppButton from "../../shared/AppButton.vue";
@@ -403,6 +403,7 @@ const loadMoreCategories = () => {
             ...reactiveData.categoriesResult,
             ...props.categoriesResult?.data,
           ];
+          //Needed for local search filter
           reactiveData.oldCategoriesData = reactiveData.categoriesResult;
         },
       }

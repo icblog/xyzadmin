@@ -12,6 +12,7 @@
   "devDependencies": {
     "@vue/compiler-sfc": "^3.2.45",
     "axios": "^0.21",
+    "browser-sync": "^2.27.11",
     "browser-sync-webpack-plugin": "^2.3.0",
     "laravel-mix": "^6.0.6",
     "lodash": "^4.17.19",
@@ -21,7 +22,6 @@
   "dependencies": {
     "@inertiajs/vue3": "^1.0.0",
     "bootstrap-css-only": "^4.4.1",
-    "browser-sync": "^2.27.11",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "vue": "^3.2.36",

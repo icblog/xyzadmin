@@ -1,26 +1,23 @@
-.homepage-container {
-	padding: 5rem;
+.project-detail,
+.skill-detail {
+    padding: 0.8rem;
+    margin-bottom: 0.6rem;
+    border-top: 0.1rem solid $primaryColor;
 }
 
-.more-about-me-link-home-page {
-	color: $blackColor;
-	text-decoration: underline;
-
-	font-weight: bold;
-
-	&:hover {
-		color: $darkGreyColor;
-		text-decoration: underline;
-
-	}
+.skill-detail .skills-heading {
+    color: $baseColor;
 }
+
+.skill-detail .all-skill-wrapper {
+    font-size: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
 
 @media (max-width: 991.98px) {}
 
 @media (max-width: 767.98px) {}
 
-@media (max-width: 575.98px) {
-	.homepage-container {
-		padding: 4.6rem;
-	}
-}
+@media (max-width: 575.98px) {}

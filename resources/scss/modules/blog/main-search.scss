@@ -2,7 +2,6 @@
     background-color: $lightGreyColor;
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
-    margin-top: -1rem;
     z-index: 5;
 }
 
@@ -11,6 +10,7 @@
     min-height: 30rem;
     background-color: $whiteColor;
     margin-top: 0.2rem;
+    overflow-y: scroll;
 }
 
 .blog-search-result a {

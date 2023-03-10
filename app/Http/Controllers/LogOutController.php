@@ -17,7 +17,7 @@ class LogOutController extends BaseController{
       $redirectLink = "/home";
       $type = "success";
       $msg = "You have log out successfully";
-      $redirectTime = 4000;
+      $redirectTime = 2000;
         try {
 
             Auth::logout();

@@ -17,7 +17,7 @@
                 <div v-if="mainPostResult.length === 0" class="col-md-12 pt-5 mt-5">
                   <HandleMsg
                     infotype="info"
-                    :msg="`Sorry there no <strong>${urlSlug}</strong> post, please try again later thank you`"
+                    :msg="`Sorry no post found in <strong>${urlSlug}</strong>, please try again later thank you`"
                   />
                 </div>
 
@@ -118,7 +118,7 @@ export default {
   props: {
     errors: {
       type: Object,
-      default: {},
+      default: [],
     },
     pageIntro: {
       type: String,
@@ -126,11 +126,11 @@ export default {
     },
     latestPostResult: {
       type: Object,
-      default: {},
+      default: [],
     },
     popularPostResult: {
       type: Object,
-      default: {},
+      default: [],
     },
     categoriesResult: {
       type: Array,
@@ -138,7 +138,7 @@ export default {
     },
     mainResult: {
       type: Object,
-      default: {},
+      default: [],
     },
     urlSlug: {
       type: String,
@@ -157,7 +157,7 @@ export default {
   data() {
     return {
       isPaginating: false,
-      mainPostResult: this.mainResult.data,
+      mainPostResult: this.mainResult?.data,
       initialUrl: this.$page.url,
     };
   },
@@ -165,12 +165,12 @@ export default {
     limitString,
     returnFormattedDate,
     loadMorePosts() {
-      if (this.mainResult.next_page_url === null) {
+      if (this.mainResult?.next_page_url === null) {
         return;
       }
 
       router.get(
-        this.mainResult.next_page_url,
+        this.mainResult?.next_page_url,
         {},
         {
           preserveState: true,
@@ -183,7 +183,7 @@ export default {
             this.isPaginating = false;
           },
           onSuccess: () => {
-            this.mainPostResult = [...this.mainPostResult, ...this.mainResult.data];
+            this.mainPostResult = [...this.mainPostResult, ...this.mainResult?.data];
             window.history.replaceState({}, this.$page.title, this.initialUrl);
           },
         }

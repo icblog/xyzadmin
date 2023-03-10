@@ -2,14 +2,14 @@
 Monokai style - ported by Luigi Maselli - http://grigio.org
 */
 .post-wrapper pre {
-    background-color: #131627;
+    background-color: $primaryColorDarker;
     padding: 1rem;
     padding: 1.5rem;
     min-height: 6rem;
 }
 
 .hljs {
-    background-color: #131627;
+    background-color: $primaryColorDarker;
     color: #ddd;
 }
 
