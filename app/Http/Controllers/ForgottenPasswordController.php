@@ -50,7 +50,7 @@ class ForgottenPasswordController extends BaseController{
                     ->withInput();
            
                 die();
-            }else{
+            }else if(!is_null($userOutCome["user"])){
 
               
 

@@ -116,7 +116,7 @@ private function setRegisterLinkSession($redirectReason,$request,$redirectUrl="/
         //if user exist, send a password reset link.
       //if not send verify link to user email.
 
-      if($userOutCome["user"] == ""){
+      if(is_null($userOutCome["user"])){
             $action = "secure1";
             $subject ="About your registration";
             $emailTemplate = "mail.new-account";

@@ -17,15 +17,17 @@ class User extends Authenticatable{
 
 
 public static function checkIfUserExist($fieldTocheck,$fieldValue){
-    $outComeArray = array("error" => "", "user" => "");
+    $outComeArray = array("error" => false, "user" => null);
   
   try {
   
      $user = DB::table('users')->where($fieldTocheck, $fieldValue)->first();
   
-     if(!is_null($user)) {
-        $outComeArray["user"] = $user;
-     }
+     $outComeArray["user"] = $user;
+
+    //  if(!is_null($user)) {
+    //     $outComeArray["user"] = $user;
+    //  }
   
      return $outComeArray;
   

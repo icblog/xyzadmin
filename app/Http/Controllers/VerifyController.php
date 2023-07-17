@@ -115,7 +115,7 @@ public function index(Request $request){
 
                 }//End if out come error
 
-                if($userOutCome["user"] != ""){
+                if(!is_null($userOutCome["user"])){
                    //Check the value of token status
                    $userRes =  $userOutCome["user"];
                     if($userRes->token_status == "no"){
