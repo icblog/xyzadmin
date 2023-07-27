@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="page-intro-wrapper">
             <h1>{{ singlePostResult?.title }}</h1>
-            <p class="single-post-author-p">
+            <p v-if="singlePostResult?.createdby_name" class="single-post-author-p">
               By: {{ singlePostResult?.createdby_name }} in
               <span
                 v-if="singlePostResult != null"
@@ -29,8 +29,16 @@
       </div>
       <div v-else class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 mt-2 mb-3">
-          <div class="post-wrapper pt-2">
+          <div v-if="singlePostResult != null" class="post-wrapper pt-2">
             <Markdown :source="singlePostResult?.body" />
+          </div>
+          <div v-else class="post-wrapper pt-4">
+            <HandleMsg
+              infotype="info"
+              msg="<p>
+              Sorry, the post is either deleted or the link is invalid.
+            </p>"
+            />
           </div>
 
           <div class="col-md-12 no-padding next-prev-link-wrapper">
@@ -74,16 +82,18 @@
                 </div>
               </div>
             </section>
-            <!-- Blog comment -->
-            <BlogComment
-              :postId="singlePostResult?.id"
-              :requestSlug="urlSlug"
-              :postCommentResult="postCommentResult"
-              :previousUserCommentResult="previousUserCommentResult"
-            />
+            <section v-if="singlePostResult != null">
+              <!-- Blog comment -->
+              <BlogComment
+                :postId="singlePostResult?.id"
+                :requestSlug="urlSlug"
+                :postCommentResult="postCommentResult"
+                :previousUserCommentResult="previousUserCommentResult"
+              />
 
-            <!-- Blog comment replies -->
-            <BlogReplies :commentEntry="postCommentResult" />
+              <!-- Blog comment replies -->
+              <BlogReplies :commentEntry="postCommentResult" />
+            </section>
           </div>
         </div>
 

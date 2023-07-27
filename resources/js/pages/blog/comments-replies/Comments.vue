@@ -140,9 +140,9 @@ const commentData = reactive({
   isCommentUpdatingOrdeleting: false,
   deletedCommentIds: [],
   isCommentUpdatedSuccess: false,
-  totalComment: props.postCommentResult?.total,
-  postCommentResult: props.postCommentResult?.data,
-  initialUrl: props.postCommentResult?.path,
+  totalComment: props.postCommentResult.total ? props.postCommentResult.total : 0,
+  postCommentResult: props.postCommentResult.data ? props.postCommentResult.data : [],
+  initialUrl: props.postCommentResult.path ? props.postCommentResult.path : "",
   isPaginating: false,
   previousUserComment: "",
   // Comment Reply reactive data

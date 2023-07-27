@@ -19,11 +19,15 @@ class BlogController extends BaseController{
     private $resultPerPage = 12;
 
     public function redirectToBlogHome($action,$linkSlug){
-      
-        return redblog.indexirect()
-        ->route('', [$action,$linkSlug])
+       return redirect()
+        ->route('blog.index', [$action,$linkSlug])
         ->withErrors(["fail"=> $this->returnGenericSystemErrMsg()]);
     }//End method redirectToBlogHome
+
+  public function redirectToBlogIndex(){
+     return redirect()
+      ->route('blog.index', ['post','latest']);
+  }//End method redirectToBlogIndex
 
     public function index(Request $request){
         $dataToView = "";

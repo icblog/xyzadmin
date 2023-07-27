@@ -77,6 +77,9 @@ Route::get('/reset-password',[ResetPasswordController::class, 'index'])->name("r
 Route::post('/handle-reset-password',[ResetPasswordController::class, 'update'])->name("resetPass.update")->middleware('isAlreadyLoggedIn');
 
 // ==========BLOG ROUTE===========//
+Route::get('/blog',[BlogController::class, 'redirectToBlogIndex']);
+Route::get('/blog/post',[BlogController::class, 'redirectToBlogIndex']);
+Route::get('/blog/category',[BlogController::class, 'redirectToBlogIndex']);
 Route::post('/blog/search-post',[BlogController::class, 'searchPost'])->name("blog.search");
 Route::get('/blog/{action}/{slug}',[BlogController::class, 'index'])->name("blog.index");
 Route::get('/blog/{postslug}',[BlogController::class, 'single'])->name("blog.single");
