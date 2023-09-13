@@ -1,7 +1,11 @@
 .viewallvisitors-search-wrapper {
-    background-color: $lightGreyColor;
+    background-color: $whiteColor;
+    border: 0.1rem solid $blackColor;
     padding: 0.8rem 0.6rem;
     margin-bottom: 1rem;
+    // position: absolute;
+    // z-index: 10;
+    // top: 2.8rem;
 }
 
 .viewallvistors-result-wrapper {
@@ -9,20 +13,18 @@
     min-height: 23rem;
 }
 
-// .viewallvistors-result-wrapper .row .col-md-12 {
-//     padding-left: 0;
-//     padding-right: 0;
-
-// }
-
-// .viewallvisitors-search-wrapper .datepicker-input {
-//     border: 0.1rem solid $lightGreyColor !important;
-//     display: block;
-//     margin-right: 1rem;
-// }
 
 @media (max-width: 991.98px) {}
 
 @media (max-width: 767.98px) {}
 
-@media (max-width: 575.98px) {}
+@media (max-width: 575.98px) {
+
+    .viewallvisitors-search-wrapper {
+        left: 1.8rem;
+        right: 1.8rem;
+        top: 2.5rem;
+        position: absolute;
+        z-index: 10;
+    }
+}

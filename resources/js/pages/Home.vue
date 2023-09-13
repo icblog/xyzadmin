@@ -3,13 +3,13 @@
     <div class="container-wrapper">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <SideBar
               @updateMenuItemClicked="updateMenuItemClicked"
               :currentMenuItemCliked="homeData.menuItemClicked"
             />
           </div>
-          <div class="col-md-9">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
             <div v-if="homeData.isMenuItemBeenClicked">
               <LoadingIndicator />
             </div>
@@ -18,7 +18,7 @@
                 <Dashboard :menuItemClicked="homeData.menuItemClicked" />
               </section>
               <section v-show="homeData.menuItemClicked == 'current visitors'">
-                <CurrentVisitors :menuItemClicked="homeData.menuItemClicked"/>
+                <CurrentVisitors :menuItemClicked="homeData.menuItemClicked" />
               </section>
               <section v-show="homeData.menuItemClicked == 'view all visitors'">
                 <ViewAllVisitors :menuItemClicked="homeData.menuItemClicked" />

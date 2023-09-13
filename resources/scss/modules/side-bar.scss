@@ -17,9 +17,11 @@
     cursor: pointer;
     font-size: 1rem;
 
-    &:hover {
-        color: $blackColor;
-    }
+
+}
+
+.side-bar-wrapper ul li:hover {
+    color: $blackColor;
 }
 
 .side-bar-wrapper ul .menu-active {
@@ -35,8 +37,22 @@
 
     color: $baseColor;
 
-    &:hover {
-        color: $blackColor;
-        text-decoration: none;
+}
+
+.side-bar-wrapper ul li a:hover {
+
+    color: $blackColor;
+    text-decoration: none;
+
+}
+
+@media (max-width: 991.98px) {
+    .side-bar-wrapper ul li {
+        float: left;
+        margin-right: 0.8rem;
     }
 }
+
+@media (max-width: 767.98px) {}
+
+@media (max-width: 575.98px) {}

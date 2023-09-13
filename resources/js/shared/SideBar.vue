@@ -9,7 +9,7 @@
       >
         <template v-slot:accordion-trigger> <h6 class="pt-2">Manage User</h6> </template>
         <template v-slot:accordion-content>
-          <ul>
+          <ul class="cf">
             <li>Add user</li>
             <li>Edit user</li>
           </ul>
@@ -28,7 +28,7 @@
           <h6 class="pt-2">Manage Visitors</h6>
         </template>
         <template v-slot:accordion-content>
-          <ul>
+          <ul class="cf">
             <li
               :class="currentMenuItemCliked == 'current visitors' ? 'menu-active' : ''"
               @click="
