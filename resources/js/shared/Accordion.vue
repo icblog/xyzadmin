@@ -1,8 +1,8 @@
 <template>
   <div class="accordion-wrapper">
     <div @click="updateIndex" class="accordion-trigger cf">
-      <div className="float-left">
-        <span className="collapsed-heading"><slot name="accordion-trigger"></slot></span>
+      <div class="float-left">
+        <span class="collapsed-heading"><slot name="accordion-trigger"></slot></span>
       </div>
       <div class="float-right pr-3 pt-1">
         <span class="collapsed-icon"
@@ -16,12 +16,12 @@
       </div>
     </div>
     <transition name="expand">
-    <div class="accordion-content-wrapper" >
-      <div v-show="activeIndex === itemIndex" class="accordion-content" ref="content">
-        <slot name="accordion-content"></slot>
+      <div class="accordion-content-wrapper">
+        <div v-show="activeIndex === itemIndex" class="accordion-content" ref="content">
+          <slot name="accordion-content"></slot>
+        </div>
       </div>
-    </div>
-    </Transition>
+    </transition>
   </div>
 </template>
 

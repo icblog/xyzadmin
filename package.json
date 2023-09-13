@@ -22,9 +22,11 @@
   "dependencies": {
     "@inertiajs/vue3": "^1.0.0",
     "bootstrap-css-only": "^4.4.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.6.0",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "vue": "^3.2.36",
-    "vue3-markdown-it": "^1.0.10"
+    "vue3-datepicker": "^0.4.0"
   }
 }

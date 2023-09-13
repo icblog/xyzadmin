@@ -8,9 +8,9 @@
         <div class="pt-2 pb-5">
           <Logo />
         </div>
-        <h1 class="pt-5">{{ title }}</h1>
+        <h1 class="pl-4 pt-5">{{ title }}</h1>
         <div class="form-wrapper">
-          <p>{{ description }}</p>
+          <p class="pt-4">{{ description }}</p>
           <p><AppLink linkUrl="/" className="primary-btn">Go to home page</AppLink></p>
         </div>
       </div>

@@ -15,22 +15,13 @@
 @import "modules/forms";
 @import "modules/verify";
 @import "modules/footer";
-@import "modules/app-accordion";
 @import "modules/app-modal";
-@import "modules/home";
+@import "modules/app-accordion";
 
-//Blog styles
-@import "modules/blog/main-search";
-@import "modules/blog/blog-home";
-@import "modules/blog/blog-single";
-@import "modules/blog/blog-side-bar";
-@import "modules/blog/blog-comments";
-
-// Admin Styles
-@import "modules/admin/util";
-@import "modules/admin/dashboard";
-@import "modules/admin/category";
-@import "modules/admin/multi-select";
-@import "modules/admin/post";
-
-@import "modules/markdown";
+@import "modules/option-element";
+@import "modules/localSearch";
+@import "modules/co-worker-search";
+@import "modules/side-bar";
+@import "modules/current-visitors";
+@import "modules/visitors-card";
+@import "modules/view-all-visitors";

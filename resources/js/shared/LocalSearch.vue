@@ -1,18 +1,22 @@
 <template>
-  <div class="input-group sidebar-search-category-input-wrapper mb-3 mt-4">
-    <span class="sidebar-search-category-icon-search">
+  <div class="input-group local-search-wrapper">
+    <span class="local-search-icon">
       <i class="fas fa-search"></i>
     </span>
     <input
       type="text"
-      class="form-control sidebar-search-category-input"
-      placeholder="Search category"
+      :class="{
+        [inputClass]: true,
+        'form-control': true,
+        'local-search-input': true,
+      }"
+      :placeholder="inputPlaceHolderValue"
       v-model="filterText"
     />
     <span
       v-if="filterText.length > 0"
-      class="sidebar-search-category-icon-times"
-      @click="clearCategoryFilterInput"
+      class="local-search-icon-times"
+      @click="clearFilterInput"
     >
       <i class="fas fa-times"></i>
     </span>
@@ -34,11 +38,20 @@ const props = defineProps({
     type: String,
     default: "name",
   },
+
+  inputPlaceHolderValue: {
+    type: String,
+    default: "Search ....",
+  },
+  inputClass: {
+    type: String,
+    default: "",
+  },
 });
 
-const emit = defineEmits();
+const emit = defineEmits(["updateResultObj"]);
 
-const clearCategoryFilterInput = () => {
+const clearFilterInput = () => {
   filterText.value = "";
 };
 
@@ -46,10 +59,11 @@ watch(filterText, (newValue) => {
   let newArrObj = [];
   if (newValue == "") {
     newArrObj = props.oldResultObj;
+    //console.log(newArrObj);
   } else {
     newArrObj = returnFilteredText(newValue, props.oldResultObj, props.whatToCheck);
   }
 
-  emit("updateCategoriesResult", { arrObj: newArrObj, newValue: newValue });
+  emit("updateResultObj", { arrObj: newArrObj, newValue: newValue });
 });
 </script>

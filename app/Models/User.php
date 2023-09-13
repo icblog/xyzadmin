@@ -38,7 +38,32 @@ public static function checkIfUserExist($fieldTocheck,$fieldValue){
    
 }//End check if user exist
 
+public static function searchUser($searchedWord){
+  $outComeArray = array("error"=>false, "searchResult"=> []);
 
+try {
+       
+  $outComeArray["searchResult"] = DB::table('users')
+                
+                ->select('fname','lname','phone','email')
+                ->where([
+                  ['fname', 'LIKE', "%{$searchedWord}%"]
+                ])
+                ->orWhere([
+                  ['lname', 'LIKE', "%{$searchedWord}%"]
+                ])
+                ->limit(5)
+                ->get();
+
+    return $outComeArray;
+
+  } catch (\Exception $e) {
+     //dd($e);
+    $outComeArray["error"] = true;
+    return $outComeArray;
+  }
+ 
+}//End searchUser
 
 
 }

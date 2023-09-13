@@ -1,28 +1,43 @@
-.form-wrapper,
-.form-wrapper-contact-form {
+.form-wrapper {
   padding: 2rem;
-  margin-top: 1rem;
+  margin-top: -4rem;
   background-color: $lightGreyColor;
 }
 
-.form-wrapper .primary-btn,
-.form-wrapper-contact-form .primary-btn {
+.form-wrapper .primary-btn {
   width: 100% !important;
 }
 
-.form-wrapper label,
-.form-wrapper-contact-form label {
-  font-weight: 500;
-  color: $darkGreyColor;
+.form-wrapper label {
+  font-weight: 600;
+  font-size: 1rem;
 }
 
-.form-wrapper .err-div,
-.form-wrapper-contact-form .err-div-contact-form {
+.form-wrapper .optional {
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.form-wrapper .selected-visitor-p {
+  margin-top: -0.5rem;
+  color: $blackColor;
+  font-weight: bold;
+}
+
+.form-wrapper .selected-visitor-p .change-visitor-btn {
+  color: $whiteColor;
+  background-color: $blackColor;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $darkGreyColor;
+  }
+}
+
+.form-wrapper .err-div {
   display: none;
-}
-
-.saveorpublish {
-  border: 0.1rem solid $lightGreyColor;
 }
 
 .input-error {
@@ -48,86 +63,151 @@
   /* tada */
 }
 
-.register-stepper {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  position: relative;
-  margin: 0 auto 1.5em;
+.quick-wrapper {
+  margin-top: -1rem;
+}
 
-  &::before {
-    z-index: 0;
-    content: "";
-    display: block;
-    position: absolute;
-    height: 2px;
-    top: calc(50% - 1px);
-    background: $lightGreyColor;
-    width: calc(100% - 20px);
+.quick-btn {
+  font-size: 0.9rem;
+  padding: 0.2rem 0.6rem;
+  display: inline-block;
+  margin-right: 0.4rem;
+  cursor: pointer;
+  color: $whiteColor;
+  background-color: $primaryColor;
+
+  &:hover {
+    background-color: $primaryColorDark;
   }
 }
 
+.quick-btn-disabled {
+  cursor: auto;
+  color: $baseColor;
+  background-color: $lighterGreyColor;
 
-
-
-.step {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-  border: 2px solid $lightGreyColor;
-  color: $lightGreyColor;
-  background-color: $whiteColor;
-  border-radius: 50%;
-  min-width: 25px;
-  min-height: 25px;
-  line-height: 20px;
-  font-size: 16px;
-
-  &-active {
-    color: $primaryColorDark;
-    border-color: $primaryColorDark;
+  &:hover {
+    background-color: $lighterGreyColor;
   }
+}
 
-  &-done {
+.badge-img-wrapper {
+  display: inline-block;
+  margin-left: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.badge-img {
+  width: 130px;
+  height: 52px;
+}
+
+.option-toggle-btn {
+  padding: 0.3rem 0.6rem;
+  background-color: $blackColor;
+  color: $whiteColor;
+
+  &:hover {
+    background-color: $darkGreyColor;
     color: $whiteColor;
-    background-color: $primaryColor;
-    border-color: $primaryColor;
-    opacity: 0.8;
-  }
-
-  &-number {
-
-    font-weight: 800;
-    line-height: 1;
-    vertical-align: middle;
   }
 }
 
-// Transition SLIDE FADE
-.slide-fade-enter-active {
-  transition: all .3s ease;
+.form-responds-msg {
+  background-color: $whiteColor;
+  text-align: center;
 }
 
-.slide-fade-leave-active {
-  display: none;
-  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+.fancy-input {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
 }
 
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(10px);
+.check-box-container {
+  display: block;
+  position: relative;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  font-size: 1.375rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.check-box-container input {
+  position: absolute;
   opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
-@media (max-width: 991.98px) {}
+.check-box-container .checkmark {
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  height: 1.4rem;
+  width: 1.4rem;
+  background-color: $whiteColor;
+  border: 0.1rem solid $midGreyColor;
+}
 
-@media (max-width: 767.98px) {
+.check-box-container .checkmarkcoworkerform {
+  left: -0.9rem;
+}
 
-  .form-wrapper,
-  .form-wrapper-contact-form {
-    margin-top: 0.8rem;
+/* On mouse-over, add a grey background color */
+.check-box-container:hover input~.checkmark {
+  background-color: $whiteColor;
+}
+
+/* When the checkbox is checked, add a blue background */
+.check-box-container input:checked~.checkmark {
+  background-color: $whiteColor;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.check-box-container input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.check-box-container .checkmark:after {
+  left: 0.563rem;
+  top: 0.313rem;
+  width: 0.313rem;
+  height: 0.625rem;
+  border: solid $blackColor;
+  border-width: 0 0.188rem 0.188rem 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.check-box-container .induction-text,
+.check-box-container .induction-text-coworker {
+  font-weight: normal;
+}
+
+.check-box-container .induction-text-coworker {
+  margin-left: 0.3rem;
+}
+
+@media (max-width: 991.98px) {
+  .quick-btn {
+    margin-top: 0.4rem;
   }
 }
+
+@media (max-width: 767.98px) {}
 
 @media (max-width: 575.98px) {}

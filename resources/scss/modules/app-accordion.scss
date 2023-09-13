@@ -1,8 +1,11 @@
 .accordion-trigger {
   cursor: pointer;
-  background-color: $primaryColorDarker;
-  color: $whiteColor;
+  background-color: $lightGreyColor;
   padding: 0.6rem 0.8rem;
+}
+
+.collapsed-icon {
+  color: $blackColor;
 }
 
 .accordion-wrapper {
@@ -15,7 +18,7 @@
 
 .accordion-content {
   background-color: $whiteColor;
-  padding: 1rem;
+  //padding: 1rem;
   overflow: hidden;
 }
 

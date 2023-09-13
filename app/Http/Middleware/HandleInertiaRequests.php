@@ -40,12 +40,13 @@ class HandleInertiaRequests extends Middleware
             //
             "isLoggedIn" => $this->isLoggedIn(),
             "isAdmin" => $this->isAdmin(),
-             "username" => $this->returnUsername()
+             "username" => $this->returnUsername(),
+             "respondsMsg"=> $this->returnRespondsMsg($request)
         ]);
     }
 
     //custom function
-    public function isLoggedIn(){
+    private function isLoggedIn(){
         $isloggedIn = false;
  
         if(Auth::check()){
@@ -55,7 +56,7 @@ class HandleInertiaRequests extends Middleware
         return $isloggedIn;
   } 
 
-public function returnUsername(){
+  private function returnUsername(){
     $username = "";
 
     if(Auth::check()){
@@ -65,7 +66,7 @@ public function returnUsername(){
     return $username;
 } 
  
-  public function isAdmin(){
+private function isAdmin(){
    $isAdmin = false;
  
    if(Auth::check() && Auth::user()->role == 1){
@@ -74,6 +75,18 @@ public function returnUsername(){
  
    return $isAdmin;
  }
+
+ private function returnRespondsMsg($request){
+         $respondsMsg = "";
+    if ($request->session()->has('respondsMsg')) {
+        $respondsMsg = $request->session()->pull('respondsMsg');
+        $request->session()->forget('respondsMsg');
+      }
+  
+    return $respondsMsg;
+  }
+
+ 
 
 
 }

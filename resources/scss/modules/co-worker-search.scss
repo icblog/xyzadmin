@@ -1,0 +1,15 @@
+.co-worker-search-result {
+    background-color: $whiteColor;
+    padding: 0.5rem;
+}
+
+.co-worker-search-result .result-entry-p {
+    background-color: $lighterGreyColor;
+    padding: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+        color: $blackColor;
+    }
+
+}

@@ -15,7 +15,7 @@ public function replaceFirstOccuranceOfChar($search, $replace, $subject){
 }
   
 public function returnGenericSystemErrMsg(){
-	return "Sorry system error, your request can not be processed please try again later thank you";
+	return "Sorry system error, your request can not be processed please contact a team leader or a manager thank you";
 }//End returnGenericSystemErrMsg
 
 public function returnLinkErrMsg(){
@@ -109,5 +109,11 @@ public function randomNumber($length = 6){
    public function datetimeToText($datetime=""){
 	  $unixdatetime = strtotime($datetime); 
 	  return strftime("%B %d, %Y at %I:%M %p", $unixdatetime);
+    }
+
+    public function validatePhone($phoneNumber){
+      $res = preg_match('/^(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}$/',$phoneNumber);
+     // dd($res);
+      return $res;
     }
  }// END CLASS

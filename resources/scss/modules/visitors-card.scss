@@ -1,0 +1,58 @@
+.visitors-card-wrapper .accordion-trigger {
+    padding: 0.3rem 0.5rem;
+    background-color: $lightGreyColor;
+    opacity: 0.9;
+    color: $blackColor;
+}
+
+.visitors-card-wrapper .collapsed-icon {
+    color: $blackColor;
+    opacity: 0.9;
+}
+
+.visitors-card-wrapper .accordion-content {
+    position: relative;
+    border: 0.1rem solid $lightGreyColor;
+    border-top: none;
+}
+
+.visitors-card-wrapper .accordion-content ul {
+    padding: 0.6rem 0.6rem;
+}
+
+.visitors-card-wrapper .accordion-content ul li {
+    font-size: 0.9rem;
+    color: $blackColor;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+.visitors-card-wrapper .accordion-content ul li span {
+    color: $blackColor;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+.visitors-card-wrapper .detail-col1,
+.visitors-card-wrapper .detail-col2 {
+    margin-bottom: -1.2rem;
+}
+
+.visitors-card-wrapper .detail-col3 {
+    padding: 1.5rem 0 0 0;
+}
+
+@media (max-width: 991.98px) {
+    .visitors-card-wrapper .accordion-content ul {
+        padding: 0.2rem 0.6rem;
+    }
+
+    .visitors-card-wrapper .detail-col3 {
+        text-align: right;
+        padding: 0 2.5rem 1rem 0;
+    }
+}
+
+@media (max-width: 767.98px) {}
+
+@media (max-width: 575.98px) {}

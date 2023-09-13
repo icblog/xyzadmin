@@ -1,7 +1,6 @@
 <template>
   <div class="logo-wrapper">
-    <span class="logo-dot">.</span>
-    <AppLink linkUrl="/"> icBlog </AppLink>
+    <h1 class="xyz-logo"><AppLink linkUrl="/">XYZ LTD</AppLink></h1>
   </div>
 </template>
 

@@ -4,7 +4,7 @@
       {{ appName + " | " + pageTitle }}
     </title>
   </Head>
-  <Header />
+  <Header :backUrl="backUrl" :pageIntro="pageIntro" />
   <div class="content-wrapper">
     <slot />
   </div>
@@ -21,6 +21,16 @@ import { Head } from "@inertiajs/vue3";
 
 defineProps({
   pageTitle: {
+    type: String,
+    default: "",
+  },
+
+  pageIntro: {
+    type: String,
+    default: "",
+  },
+
+  backUrl: {
     type: String,
     default: "",
   },

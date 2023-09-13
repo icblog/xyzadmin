@@ -7,7 +7,7 @@ export const isArray = (what) => {
 };
 
 export const returnSystemErrorMsg = () => {
-  return "Sorry system error, your request can not be processed please try again later thank you";
+  return "Sorry system error, your request can not be processed please see a member of the security team thank you!";
 };
 
 export const replaceChar = (str, whatTosearch, replaceWith) => {
@@ -84,8 +84,12 @@ export function removeItemFromArrayByValue(itemValue, itemArray) {
   return filteredArray;
 }
 
-export function returnFormattedDate(dateParam) {
-  return new Date(dateParam).toLocaleDateString();
+export function returnFormattedDate(dateParam, dateWithTime = false) {
+  let returnDate = new Date(dateParam).toLocaleDateString();
+  if (dateWithTime) {
+    returnDate = returnDate + " " + new Date(dateParam).toLocaleTimeString("en-GB").slice(0, 5);
+  }
+  return returnDate;
 }
 export function toSqlDatetime(inputDate) {
   // input looks like this { new Date()};
@@ -140,3 +144,112 @@ export function moveCursorToTextEnd(input, inputValue) {
   let textEnd = inputValue.length;
   setTimeout(() => input.setSelectionRange(textEnd, textEnd));
 }
+
+export function validMobileNumber(number) {
+  let regex = /^(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}$/,
+    result = regex.test(number);
+  return result;
+}
+
+export function returnCoWorkerFullName(fname, lname) {
+  return fname + " " + lname;
+};
+
+export function returnCurrentDate() {
+  const current = new Date();
+  return current.toDateString();
+};
+
+export function returnCurrentTime() {
+  const current = new Date();
+  return current.toLocaleTimeString("en-GB").slice(0, 5);
+};
+
+export function generatePdf(jsPDF, autoTable, columnsArray, attrArray, dataObj, headerMsg = "Records", autoPrint = false) {
+  // Create a new PDF document
+  let doc = new jsPDF("l", "pt"),
+    rows = [],
+    currentDateTime = "Date: " + returnCurrentDate() + " Time: " + returnCurrentTime(),
+    header =
+      "  |  (" +
+      dataObj.length +
+      ") " + headerMsg;
+
+  dataObj.forEach((visitor, i) => {
+
+    let temParr = [];
+
+    for (let i = 0; i < attrArray.length; i++) {
+      temParr.push(visitor[attrArray[i]]);
+    }
+
+    rows.push(temParr);
+
+  });
+
+  doc.autoTable({
+    columns: columnsArray,
+    body: rows,
+    margin: { horizontal: 10 },
+    styles: { overflow: "linebreak" },
+    bodyStyles: { valign: "top" },
+    columnStyles: { email: { cellWidth: "wrap" } },
+    theme: "striped",
+    showHead: "everyPage",
+    didDrawPage: function (data) {
+      // Header
+      doc.setFontSize(14);
+      doc.setTextColor(40);
+      doc.text(currentDateTime + header, 10, 20, { baseline: "top" });
+
+      // Footer
+      var str =
+        "Page " +
+        doc.internal.getCurrentPageInfo().pageNumber +
+        " of " +
+        doc.internal.getNumberOfPages();
+
+      doc.setFontSize(10);
+
+      // jsPDF 1.4+ uses getWidth, <1.4 uses .width
+      var pageSize = doc.internal.pageSize;
+      var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight();
+      doc.text(str, data.settings.margin.left, pageHeight - 10);
+    },
+  });
+  // Print the PDF
+  if (autoPrint) {
+    doc.autoPrint();
+  }
+  doc.output("dataurlnewwindow");
+
+};
+
+
+export function returnSortOptionArray() {
+  return [
+    {
+      name: "Latest",
+    },
+    {
+      name: "A-Z",
+    },
+
+    {
+      name: "Z-A",
+    },
+
+    {
+      name: "Date ascending",
+    },
+    {
+      name: "Date descending",
+    },
+    // {
+    //   name: "Company",
+    // },
+    // {
+    //   name: "Reason",
+    // },
+  ];
+};

@@ -1,9 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ResumeController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\BlogController;
+
+//AUTH IMPORT
+
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\ForgottenPasswordController;
@@ -14,10 +13,13 @@ use App\Http\Controllers\RegisterController;
 
 
 
-//ADMIN IMPORT
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\AdminPostController;
-use App\Http\Controllers\AdminCategoryController;
+
+
+//USER IMPORT
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\VisitorsController;
+
+
 
 
 /*
@@ -31,19 +33,12 @@ use App\Http\Controllers\AdminCategoryController;
 |
 */
 
-// ==========HOME ROUTE===========//
-Route::get('/',[HomeController::class, 'index'])->name("home.index");
-Route::get('/home',[HomeController::class, 'index'])->name("home.index");
+
 
 // ==========NOTIFICATION ROUTE===========//
 Route::get('/notification',[NotificationController::class, 'index'])->name("notification.index");
 
-// ==========RESUME ROUTE===========//
-Route::get('/resume',[ResumeController::class, 'index'])->name("resume.index");
 
-// ==========CONTACT ROUTE===========//
-Route::get('/contact',[ContactController::class, 'index'])->name("contact.index");
-Route::post('/handle-contact',[ContactController::class, 'handleContact'])->name("handle.contact");
 
 // ==========REGISTER ROUTE===========//
 Route::get('/register',[RegisterController::class, 'index'])->name("register.index")->middleware('isAlreadyLoggedIn');
@@ -76,34 +71,17 @@ Route::post('/verify-link',[VerifyController::class, 'verifyLink'])->name("verif
 Route::get('/reset-password',[ResetPasswordController::class, 'index'])->name("resetPass.index")->middleware('isAlreadyLoggedIn');
 Route::post('/handle-reset-password',[ResetPasswordController::class, 'update'])->name("resetPass.update")->middleware('isAlreadyLoggedIn');
 
-// ==========BLOG ROUTE===========//
-Route::get('/blog',[BlogController::class, 'redirectToBlogIndex']);
-Route::get('/blog/post',[BlogController::class, 'redirectToBlogIndex']);
-Route::get('/blog/category',[BlogController::class, 'redirectToBlogIndex']);
-Route::post('/blog/search-post',[BlogController::class, 'searchPost'])->name("blog.search");
-Route::get('/blog/{action}/{slug}',[BlogController::class, 'index'])->name("blog.index");
-Route::get('/blog/{postslug}',[BlogController::class, 'single'])->name("blog.single");
-Route::post('/blog/fetch-comment-replies',[BlogController::class, 'fetchCommentReplies'])->name("blog.fetchCommentReplies");
-Route::post('/blog/save-comment',[BlogController::class, 'saveComment'])->name("blog.saveComment");
-Route::post('/blog/save-comment-reply',[BlogController::class, 'saveCommentReply'])->name("blog.saveCommentReply");
-Route::post('/blog/check-reply-already-exit',[BlogController::class, 'checkReplyAlreadyExit'])->name("blog.checkReplyAlreadyExit");
-Route::post('/blog/update-or-delete-reply',[BlogController::class, 'updateOrDeleteCommentReply'])->name("blog.updateOrDeleteCommentReply");
+// ==========HOME ROUTE===========//
+Route::get('/',[HomeController::class, 'index'])->name("home.index");
+Route::get('/home',[HomeController::class, 'index'])->name("home.index");
+
+// ==========CHECK OUT VISITORS ROUTE===========//
+Route::post('/signout-visitor',[VisitorsController::class, 'signOutVisitor'])->name("signoutvisitor.index");
+Route::post('/sort-current-visitor',[VisitorsController::class, 'sortCurrentVisitor'])->name("sortcurrentvisitor");
+Route::post('/view-all-visitor',[VisitorsController::class, 'viewAllVisitor'])->name("viewallvisitors");
+
+//Remove this at later date
+Route::post('/reset-current-visitor',[VisitorsController::class, 'resetCurrentVisitor'])->name("resetcurrentvisitor");
 
 
-// ==========ADMIN  POST ROUTE===========//
 
-Route::get('/admin',[AdminDashboardController::class, 'index'])->name("admin.dashboard")->middleware('isAdmin');
-Route::get('/admin/dashboard',[AdminDashboardController::class, 'index'])->name("admin.dashboard")->middleware('isAdmin');
-Route::get('/admin/create-post',[AdminPostController::class, 'createPostIndex'])->name("admin.createPostIndex")->middleware('isAdmin');
-Route::post('/admin/create-post-save',[AdminPostController::class, 'createPostSave'])->name("admin.createPostSave")->middleware('isAdmin');
-Route::get('/admin/allpost',[AdminPostController::class, 'getAllPost'])->name("admin.getAllPost")->middleware('isAdmin');
-Route::post('/admin/delete-blog-post',[AdminPostController::class, 'delete'])->middleware('isAdmin');
-Route::get('/admin/{postId}',[AdminPostController::class, 'updatePostIndex'])->where('postId', '[0-9]+')->name("admin.updatePostIndex")->middleware('isAdmin');
-Route::post('/admin/update-post-save',[AdminPostController::class, 'updatePostSave'])->name("admin.updatePostSave")->middleware('isAdmin');
-
-
-// ==========ADMIN  CATEGORY ROUTE===========//
-Route::get('/admin/categories',[AdminCategoryController::class, 'categoriesIndex'])->name("admin.categoriesIndex")->middleware('isAdmin');
-Route::post('/admin/update-category',[AdminCategoryController::class, 'updateCategory'])->name("admin.updateCategory")->middleware('isAdmin');
-Route::post('/admin/delete-category',[AdminCategoryController::class, 'deleteCategory'])->name("admin.deleteCategory")->middleware('isAdmin');
-Route::post('/admin/create-catgory',[AdminCategoryController::class, 'createCategory'])->name("admin.createCategory")->middleware('isAdmin');

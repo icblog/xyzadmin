@@ -1,0 +1,42 @@
+.side-bar-wrapper .accordion-trigger {
+    padding: 0.3rem 0.5rem;
+    background-color: $whiteColor;
+    border: 0.1rem solid $lightGreyColor;
+}
+
+
+.side-bar-wrapper ul {
+    border: 0.1rem solid $lightGreyColor;
+    padding: 0.8rem;
+    border-top: none;
+}
+
+.side-bar-wrapper ul li {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    cursor: pointer;
+    font-size: 1rem;
+
+    &:hover {
+        color: $blackColor;
+    }
+}
+
+.side-bar-wrapper ul .menu-active {
+    color: $midGreyColor;
+    cursor: auto;
+
+    &:hover {
+        color: $midGreyColor;
+    }
+}
+
+.side-bar-wrapper ul li a {
+
+    color: $baseColor;
+
+    &:hover {
+        color: $blackColor;
+        text-decoration: none;
+    }
+}
