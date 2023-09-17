@@ -87,22 +87,11 @@
         </div>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col-md-12">
-        <VisitorAttr :vistorsResultSetData="currentVisitorsData.currentVisitorsRes" />
-      </div>
-    </div> -->
-    <div
-      v-for="(visitor, index) in currentVisitorsData.currentVisitorsRes"
-      class="row pt-3"
-    >
-      <div class="col-md-12">
-        <VisitorsDetailsCard
-          :visitor="visitor"
-          :handleSignOutVisitor="handleSignOutVisitor"
-        />
-      </div>
-    </div>
+    <VisitorsDetailsCard
+      :visitorResult="currentVisitorsData.currentVisitorsRes"
+      :handleSignOutVisitor="handleSignOutVisitor"
+      :showSignOut="false"
+    />
   </section>
   <section
     v-show="

@@ -1,55 +1,81 @@
-.visitors-card-wrapper .accordion-trigger {
-    padding: 0.3rem 0.5rem;
-    background-color: $lightGreyColor;
-    opacity: 0.9;
-    color: $blackColor;
+.visitors-card-wrapper table {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+    margin-top: 0.8rem;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.12),
+        0px 1px 2px 0px rgba(0, 0, 0, 0.24);
 }
 
-.visitors-card-wrapper .collapsed-icon {
-    color: $blackColor;
-    opacity: 0.9;
-}
-
-.visitors-card-wrapper .accordion-content {
-    position: relative;
-    border: 0.1rem solid $lightGreyColor;
-    border-top: none;
-}
-
-.visitors-card-wrapper .accordion-content ul {
-    padding: 0.6rem 0.6rem;
-}
-
-.visitors-card-wrapper .accordion-content ul li {
+.visitors-card-wrapper table th {
+    padding: 0.2rem;
+    text-align: center;
+    background-color: $lightestGreyColor;
     font-size: 0.9rem;
-    color: $blackColor;
-    opacity: 0.9;
-    font-weight: 600;
 }
 
-.visitors-card-wrapper .accordion-content ul li span {
-    color: $blackColor;
-    opacity: 0.8;
-    font-weight: normal;
+.visitors-card-wrapper table td {
+    padding: 0.2rem;
+    text-align: center;
+    font-size: 0.9rem;
+
 }
 
-.visitors-card-wrapper .detail-col1,
-.visitors-card-wrapper .detail-col2 {
-    margin-bottom: -1.2rem;
+.visitors-card-wrapper table tr {
+    padding: 0.5rem;
 }
 
-.visitors-card-wrapper .detail-col3 {
-    padding: 1.5rem 0 0 0;
+.visitors-card-wrapper table tr:nth-child(even) {
+    background-color: $lightestGreyColor;
 }
 
-@media (max-width: 991.98px) {
-    .visitors-card-wrapper .accordion-content ul {
-        padding: 0.2rem 0.6rem;
+
+@media screen and (max-width: 991.98px) {
+    .visitors-card-wrapper table {
+        border: 0;
+        box-shadow: none;
     }
 
-    .visitors-card-wrapper .detail-col3 {
+
+    .visitors-card-wrapper table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .visitors-card-wrapper table tr {
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.12),
+            0px 1px 2px 0px rgba(0, 0, 0, 0.24);
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    .visitors-card-wrapper table td {
+        border-bottom: 1px solid $midGreyColor;
+        display: block;
+        font-size: .8em;
         text-align: right;
-        padding: 0 2.5rem 1rem 0;
+    }
+
+    .visitors-card-wrapper table td::before {
+        /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+
+    .visitors-card-wrapper table td:last-child {
+        border-bottom: 0;
     }
 }
 

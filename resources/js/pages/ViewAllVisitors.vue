@@ -171,13 +171,11 @@
             >
           </div>
         </div>
-        <div
-          v-for="(visitor, index) in viewAllVisitorsData.currentVisitorsRes"
-          class="row pt-3"
-        >
-          <div class="col-md-12">
-            <VisitorsDetailsCard :showBtn="false" :visitor="visitor" />
-          </div>
+        <div class="pt-1">
+          <VisitorsDetailsCard
+            :showBtn="false"
+            :visitorResult="viewAllVisitorsData.currentVisitorsRes"
+          />
         </div>
       </div>
       <div
