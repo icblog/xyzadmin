@@ -13,5 +13,5 @@
 </template>
 
 <script setup>
-const copyRightData = `${new Date().getFullYear()} xyzadmin.icblog.uk`;
+const copyRightData = `${new Date().getFullYear()} ic-admin.icblog.uk`;
 </script>

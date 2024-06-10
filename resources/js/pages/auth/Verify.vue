@@ -11,6 +11,13 @@
 
         <div class="form-wrapper">
           <section v-if="processing"><LoadingIndicator /></section>
+          <section v-if="!processing && respondsMsg == 'code000'">
+            <HandleMsg
+              infotype="error"
+              :msg="verifyErrormsg1"
+              customClass="form-responds-msg"
+            />
+          </section>
         </div>
       </div>
     </div>
@@ -25,23 +32,40 @@ import { ref, onMounted } from "vue";
 import { router } from "@inertiajs/vue3";
 import LoadingIndicator from "../../shared/LoadingIndicator";
 import Logo from "../../shared/Logo";
+import HandleMsg from "../../shared/HandleMsg";
 
-let processing = ref(true);
+let processing = ref(false);
+const verifyErrormsg1 =
+  "Sorry the link has expired or Invalid,  you will be redirected to create a new one thank you.";
 
-defineProps({ errors: Object });
+const props = defineProps({
+  errors: Object,
+  respondsMsg: {
+    type: String,
+    default: "",
+  },
+});
 
 const handleVerifyLink = () => {
-  setTimeout(() => {
-    router.post(
-      "/verify-link",
-      {},
-      {
-        onFinish: () => {
-          processing.value = false;
-        },
-      }
-    );
-  }, 1000);
+  if (props.respondsMsg == "") {
+    processing.value = true;
+    setTimeout(() => {
+      router.post(
+        "/verify-link",
+        {},
+        {
+          onFinish: () => {
+            processing.value = false;
+            setTimeout(() => {
+              if (props.respondsMsg == "code000") {
+                router.get("/forgotten-password");
+              }
+            }, 8000);
+          },
+        }
+      );
+    }, 1000);
+  }
 };
 
 onMounted(() => {

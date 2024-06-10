@@ -16,11 +16,20 @@ class IsAdmin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
-    {
-         if (Auth::check() && Auth::user()->role == 1) {
+    public function handle(Request $request, Closure $next){
+      $system_pass_used = "no";
+
+        if ($request->session()->has('system_pass')) {
+           $system_pass_used = $request->session()->get('system_pass', '');
+        }
+     
+        if (Auth::check() && $system_pass_used =="yes"){
+            return redirect()->route("resetPass.index");
+          }else if(Auth::check() && Auth::user()->role == 1 && $system_pass_used == "no"){
             return $next($request);
         }
+
+        
         //Store intended url in a session before redirecting to login page
         $request->session()->forget('intendedUrl');
         $request->session()->put('intendedUrl', $request->path());

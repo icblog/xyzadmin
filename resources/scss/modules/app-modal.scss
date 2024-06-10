@@ -1,7 +1,7 @@
 .c-modal-back-drop {
     position: fixed;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
     z-index: 5;
@@ -11,12 +11,13 @@
 .c-modal-wrapper {
     margin: 60px auto;
     background-color: $whiteColor;
-    width: 700px;
+    width: 800px;
     padding: 1rem;
-    max-height: 20rem;
+    min-height: 20rem;
+    max-height: 100%;
     overflow-y: auto;
-
 }
+
 
 @media (max-width: 991.98px) {
     .c-modal-wrapper {

@@ -2,10 +2,28 @@
   cursor: pointer;
   background-color: $lightGreyColor;
   padding: 0.6rem 0.8rem;
+  display: flex;
+}
+
+.accordion-trigger-left {
+  flex-grow: 12;
+}
+
+.accordion-trigger-right {
+  flex-grow: 1;
+  text-align: right;
 }
 
 .collapsed-icon {
   color: $blackColor;
+}
+
+.accordion-trigger-wrapper {
+  display: flex;
+}
+
+.accordion-trigger-wrapper>div {
+  width: 100%;
 }
 
 .accordion-wrapper {
@@ -19,7 +37,7 @@
 .accordion-content {
   background-color: $whiteColor;
   //padding: 1rem;
-  overflow: hidden;
+  //overflow: hidden;
 }
 
 .expand-enter-active,

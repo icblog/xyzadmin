@@ -1,0 +1,53 @@
+.option-selected-input {
+    background-color: $whiteColor !important;
+    text-align: left !important;
+}
+
+.option-select-input-outer-wrapper {
+    position: relative;
+}
+
+.option-select-input-wrapper {
+    border: 0.1rem solid $blackColor;
+    overflow-y: scroll;
+    padding: 0.8rem 0;
+    // border-top: none;
+    height: 10rem;
+    background-color: $whiteColor;
+    position: absolute;
+    z-index: 15;
+    width: 100%;
+}
+
+.option-select-input-wrapper ul li {
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.8rem;
+    margin: 0.4rem 0;
+
+    &:hover {
+        background-color: $lightGreyColor;
+        color: $blackColor;
+    }
+}
+
+.option-selected {
+    color: $midGreyColor;
+
+    &:hover {
+        color: $midGreyColor !important;
+        background-color: $whiteColor !important;
+        cursor: auto;
+    }
+}
+
+.option-selected-hidden {
+    display: none;
+}
+
+@media (max-width: 991.98px) {}
+
+@media (max-width: 767.98px) {}
+
+@media (max-width: 575.98px) {}

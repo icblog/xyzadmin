@@ -27,6 +27,6 @@
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "vue": "^3.2.36",
-    "vue3-datepicker": "^0.4.0"
+    "vuejs3-datepicker": "^1.0.19"
   }
 }

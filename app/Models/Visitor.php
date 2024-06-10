@@ -46,17 +46,13 @@ class Visitor extends Model
      }
    
       $outComeArray = array('error'=>false,'currentVisitorsData'=>[]);
-    //   $startDate = date("Y-m-d", strtotime( '-1 days' ) ); 
-    //   $endDate = now()->format('Y-m-d');    
+        
          try {
               $query = DB::table('visitors')
              
                ->select('id','fname','lname','badge','company','phone','sign_in','sign_out','visiting','reason')
                ->whereNull('sign_out')
-            //    ->whereDate('sign_in', '>=', $startDate)
-            //    ->whereDate('sign_in', '<=', $endDate)
                ->orderBy($orderBy,$sortHow);
-
               $outComeArray['currentVisitorsData'] = $query->get();
 
               return $outComeArray;
@@ -72,7 +68,7 @@ class Visitor extends Model
     }
 
 
-    public static function findAllVisitors($orderBy='',$coworkerOrVisitorFname="", $startDate="", $endDate="",$isDateChanged="no",$paginate=false,$resultPerPage=6, $offset=0){
+    public static function findAllVisitors($orderBy='',$coworkerOrVisitorFname="", $startDate="", $endDate="",$isDateChanged="no",$paginate=false,$resultPerPage=6){
          
       switch ($orderBy) {
          case 'A-Z':
@@ -113,24 +109,27 @@ class Visitor extends Model
                }
              
                if($isDateChanged =='yes'){
-                  $query->whereDate('sign_in', '>=', $startDate)
-                  ->whereDate('sign_in', '<=', $endDate);
+                  // $query->whereDate('sign_in', '>=', $startDate)
+                  // ->whereDate('sign_in', '<=', $endDate);
+                  $query->whereDate('sign_in', '>=',explode(" ",$startDate)[0])
+                  ->whereDate('sign_in', '<=', explode(" ",$endDate)[0]);
                }
                $query->orderBy($orderBy,$sortHow);
-               
+
+
                if($paginate){
-                 
-                  $outComeArray['viewAllVisitorsData'] = $query->limit($resultPerPage)->offset($offset)->get();
-                
-               }else{
+                  $outComeArray['viewAllVisitorsData'] = $query->paginate($resultPerPage);
+                }else{
                   $outComeArray['viewAllVisitorsData'] = $query->limit($resultPerPage)
                   ->get();
                 }
+               
+            
 
              return $outComeArray;
 
             } catch (\Exception $e) {
-               
+               //dd($e);
                $outComeArray['error'] = true;
                return $outComeArray;
 
@@ -140,43 +139,40 @@ class Visitor extends Model
     }
 
 
-    public static function countVisitors($coworkerOrVisitorFname="", $startDate="", $endDate="",$isDateChanged="no"){
+   //  public static function countVisitors($coworkerOrVisitorFname="", $startDate="", $endDate="",$isDateChanged="no"){
       
-      $outComeArray = array('error'=>false,'viewAllVisitorsCount'=> 0);
+   //    $outComeArray = array('error'=>false,'viewAllVisitorsCount'=> 0);
       
-         try {
+   //       try {
            
-            $query = DB::table('visitors');
+   //          $query = DB::table('visitors');
                
-              if($coworkerOrVisitorFname !=''){
-                  $query->where([
-                     ['fname', 'LIKE', "%{$coworkerOrVisitorFname}%"]
-                  ]);
-               }
+   //            if($coworkerOrVisitorFname !=''){
+   //                $query->where([
+   //                   ['fname', 'LIKE', "%{$coworkerOrVisitorFname}%"]
+   //                ]);
+   //             }
              
-               if($isDateChanged =='yes'){
-                  $query->whereDate('sign_in', '>=', $startDate)
-                  ->whereDate('sign_in', '<=', $endDate);
-               }
+   //             if($isDateChanged =='yes'){
+   //                $query->whereDate('sign_in', '>=',explode(" ",$startDate)[0])
+   //                ->whereDate('sign_in', '<=', explode(" ",$endDate)[0]);
+   //             }
 
-                 $outComeArray['viewAllVisitorsCount'] = $query->count();
+   //               $outComeArray['viewAllVisitorsCount'] = $query->count();
                 
-           return $outComeArray;
+   //         return $outComeArray;
 
-            } catch (\Exception $e) {
+   //          } catch (\Exception $e) {
                
-               $outComeArray['error'] = true;
-               return $outComeArray;
+   //             $outComeArray['error'] = true;
+   //             return $outComeArray;
 
-            }
+   //          }
 
 
-    }
+   //  }
     
-
-
-
-}
+}// End main class
 
 
 

@@ -9,9 +9,7 @@ import { createInertiaApp } from "@inertiajs/vue3";
 //             .use(plugin)
 //             .mount(el);
 //     },
-
 // });
-
 
 createInertiaApp({
     resolve: (name) => require(`./pages/${name}.vue`),
@@ -20,5 +18,4 @@ createInertiaApp({
             .use(plugin)
             .mount(el);
     },
-
 });

@@ -2,12 +2,12 @@ import axios from "axios";
 
 //laravelEnvironment variable is from laravel views/home.blade.php
 
-let baseApiUrl = 'http://127.0.0.1:8000';
-if (appDataObj.appEnv === "remote") {
-    baseApiUrl = 'https://xyzadmin.icblog.uk';
-}
+// let baseApiUrl = 'http://127.0.0.1:8000';
+// if (appDataObj.appEnv === "remote") {
+//     baseApiUrl = 'https://xyzadmin.icblog.uk';
+// }
 export default axios.create({
-    baseURL: baseApiUrl,
+    baseURL: appDataObj.appBaseUrl,
     withCredentials: true,
     headers: { 'Content-Type': 'application/json' }
 });

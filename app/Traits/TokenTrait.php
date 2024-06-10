@@ -48,7 +48,7 @@ public function decodeToken($jwt){
 
  //Attempt to decode the token
 
-    	try {
+ try {
     $serverName = env('APP_URL','');
 	$secretKey = env('APP_KEY', ''); 
 	$token = JWT::decode($jwt, $secretKey, ['HS512']);
@@ -57,6 +57,7 @@ if ($token->iss !== $serverName ||
     $token->nbf > time() ||
     $token->exp < time()){
     $outComeArray["msg"] = "Invalid";
+    $outComeArray["data"] = $token->data;
     return $outComeArray;
 }else{
 	$outComeArray["msg"] = "Good";
@@ -67,10 +68,6 @@ if ($token->iss !== $serverName ||
     $outComeArray["msg"] = "Invalid";
     return $outComeArray;
 }
-
-    	
-	
-
 
 }//End decodeToken
 

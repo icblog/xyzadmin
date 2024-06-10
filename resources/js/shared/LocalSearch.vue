@@ -7,8 +7,7 @@
       type="text"
       :class="{
         [inputClass]: true,
-        'form-control': true,
-        'local-search-input': true,
+        'local-search-input form-control': true,
       }"
       :placeholder="inputPlaceHolderValue"
       v-model="filterText"
@@ -33,6 +32,10 @@ const props = defineProps({
     type: Object,
     default: {},
   },
+  arrType: {
+    type: String,
+    default: "obj",
+  },
 
   whatToCheck: {
     type: String,
@@ -47,6 +50,11 @@ const props = defineProps({
     type: String,
     default: "",
   },
+
+  elementName: {
+    type: String,
+    default: "",
+  },
 });
 
 const emit = defineEmits(["updateResultObj"]);
@@ -55,13 +63,36 @@ const clearFilterInput = () => {
   filterText.value = "";
 };
 
+const sortSideBarData = (newValue) => {
+  let newArrObj = [];
+  for (let index = 0; index < props.oldResultObj.length; index++) {
+    if (
+      props.oldResultObj[index].name.toLowerCase().indexOf(newValue.toLowerCase()) > -1
+    ) {
+      newArrObj.push(props.oldResultObj[index]);
+    }
+  }
+
+  return newArrObj;
+};
+
 watch(filterText, (newValue) => {
   let newArrObj = [];
+
   if (newValue == "") {
     newArrObj = props.oldResultObj;
     //console.log(newArrObj);
   } else {
-    newArrObj = returnFilteredText(newValue, props.oldResultObj, props.whatToCheck);
+    if (props.elementName == "sidebar") {
+      newArrObj = sortSideBarData(newValue);
+    } else {
+      newArrObj = returnFilteredText(
+        newValue,
+        props.oldResultObj,
+        props.whatToCheck,
+        props.arrType
+      );
+    }
   }
 
   emit("updateResultObj", { arrObj: newArrObj, newValue: newValue });

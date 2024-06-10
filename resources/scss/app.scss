@@ -10,18 +10,34 @@
 @import "modules/base";
 @import "modules/util";
 @import "modules/header";
-@import "modules/page-intro";
 @import "modules/logo";
 @import "modules/forms";
 @import "modules/verify";
 @import "modules/footer";
 @import "modules/app-modal";
 @import "modules/app-accordion";
+@import "modules/multi-select";
 
-@import "modules/option-element";
-@import "modules/localSearch";
+@import "modules/option-element-input";
+@import "modules/local-search";
 @import "modules/co-worker-search";
 @import "modules/side-bar";
-@import "modules/current-visitors";
-@import "modules/visitors-card";
-@import "modules/view-all-visitors";
+//visitors
+@import "modules/visitors/current-visitors";
+@import "modules/visitors/visitors-card";
+@import "modules/visitors/view-all-visitors";
+//absences
+@import "modules/absence/add-absence";
+@import "modules/absence/absence";
+
+//phones
+@import "modules/phone/edit-phone";
+
+//Department/Company
+@import "modules/depart_comp/depart-comp";
+
+//Locker
+@import "modules/locker/locker";
+
+//Key
+@import "modules/key/key_log";

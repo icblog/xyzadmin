@@ -1,0 +1,29 @@
+.viewallvisitors-search-wrapper {
+    background-color: $whiteColor;
+    border: 0.1rem solid $blackColor;
+    padding: 0.8rem 0.6rem;
+    margin-bottom: 1rem;
+    margin-top: 0.2rem;
+
+}
+
+.viewallvistors-result-wrapper {
+
+    min-height: 23rem;
+}
+
+
+@media (max-width: 991.98px) {}
+
+@media (max-width: 767.98px) {}
+
+@media (max-width: 575.98px) {
+
+    .viewallvisitors-search-wrapper {
+        left: 1.8rem;
+        right: 1.8rem;
+        top: 2.5rem;
+        position: absolute;
+        z-index: 10;
+    }
+}

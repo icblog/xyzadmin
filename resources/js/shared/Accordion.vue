@@ -1,10 +1,18 @@
 <template>
   <div class="accordion-wrapper">
-    <div @click="updateIndex" class="accordion-trigger cf">
-      <div class="float-left">
+    <div
+      @click="
+        () => {
+          updateIndex();
+          extraTriggerFunc();
+        }
+      "
+      class="accordion-trigger"
+    >
+      <div class="accordion-trigger-left">
         <span class="collapsed-heading"><slot name="accordion-trigger"></slot></span>
       </div>
-      <div class="float-right pr-3 pt-1">
+      <div class="accordion-trigger-right">
         <span class="collapsed-icon"
           ><i
             :class="{
@@ -44,6 +52,10 @@ export default {
     itemIndex: {
       type: Number,
       default: null,
+    },
+    extraTriggerFunc: {
+      type: Function,
+      default: () => {},
     },
   },
   methods: {

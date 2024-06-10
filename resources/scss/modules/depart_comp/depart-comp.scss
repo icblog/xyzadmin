@@ -1,0 +1,29 @@
+.depart-coworker-wrapper {
+    background-color: $whiteColor;
+    border: 0.1rem solid $darkGreyColor;
+    margin-top: 0.5rem;
+    height: 10rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.total-department-wrapper .total-depart-btn {
+    padding: 0.2rem 0.8rem;
+    margin-top: 0.5rem;
+
+    &:focus {
+        outline: none !important;
+    }
+}
+
+.total-department-wrapper .total-depart-active-btn {
+    background-color: $whiteColor !important;
+
+    &:hover {
+        background-color: $whiteColor !important;
+    }
+
+    &:focus {
+        outline: none !important;
+    }
+}

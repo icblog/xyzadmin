@@ -29,12 +29,15 @@
 }
 
 .box-shadow {
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.12),
-    0px 1px 2px 0px rgba(0, 0, 0, 0.24);
+  border: 1px solid $midDarkGreyColor;
 }
 
 .icon-color {
   color: $primaryColor;
+}
+
+.text-color-black {
+  color: $blackColor;
 }
 
 .no-border {
@@ -83,7 +86,7 @@
 }
 
 .btn-full {
-  width: 100%;
+  width: 100% !important;
 }
 
 .view-more-link {
@@ -145,6 +148,56 @@
 
 .bg-white {
   background-color: $whiteColor;
+}
+
+.result-detail-ul {
+  font-size: 0.9rem;
+  padding-left: 0.8rem;
+  padding-top: 0.5rem;
+}
+
+.result-detail-ul li {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #333333;
+}
+
+.result-detail-ul li span {
+  font-weight: normal;
+  color: #555555;
+}
+
+.data-detail-wrapper {
+  margin-top: 0.3rem;
+  margin-bottom: 0.6rem;
+  border: 0.1rem solid $midGreyColor;
+  padding-top: 0.4rem;
+  padding-bottom: 0.8rem;
+
+}
+
+.data-detail-wrapper .data-input {
+  text-align: left !important;
+  border-color: $lightGreyColor !important;
+  cursor: text;
+  color: $baseColor !important;
+  background-color: $lightGreyColor;
+  padding-left: 0.4rem !important;
+
+  &:focus {
+    border-color: $lightGreyColor !important;
+  }
+}
+
+.data-detail-wrapper .data-input-active {
+  text-align: left !important;
+  border-color: $blackColor !important;
+  color: $blackColor !important;
+  background-color: $whiteColor;
+
+  &:focus {
+    border-color: $blackColor !important;
+  }
 }
 
 @media (max-width: 991.98px) {

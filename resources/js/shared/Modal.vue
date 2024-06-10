@@ -5,7 +5,9 @@
         <div v-show="showCloseBtn" class="text-right">
           <AppButton :btnFunc="closeModal" btnStyle="secondary">X</AppButton>
         </div>
-        <slot name="c-modal-header"></slot>
+        <div class="c-modal-header-wrapper">
+          <slot name="c-modal-header"></slot>
+        </div>
       </div>
       <div class="c-modal-content-wrapper">
         <slot name="c-modal-content"></slot>
@@ -34,8 +36,6 @@ export default {
       type: Boolean,
       default: true,
     },
-
-    
   },
   methods: {
     closeModal() {

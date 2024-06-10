@@ -1,3 +1,25 @@
+.side-bar-wrapper .side-bar-menu-wrapper {
+
+    display: block;
+}
+
+
+.side-bar-wrapper .side-bar-menu-wrapper .side-bar-inner-wrapper {
+    background-color: $lightGreyColor;
+    padding: 0.7rem 0.6rem 0.1rem 0.6rem;
+
+}
+
+.side-bar-wrapper .side-bar-menu-search-warpper {
+    background-color: $whiteColor;
+}
+
+.side-bar-wrapper .side-bar-menu-wrapper .side-bar-inner-wrapper2 {
+    height: 25rem;
+    margin-top: 1rem;
+    overflow-y: scroll;
+}
+
 .side-bar-wrapper .accordion-trigger {
     padding: 0.3rem 0.5rem;
     background-color: $whiteColor;
@@ -6,32 +28,35 @@
 
 
 .side-bar-wrapper ul {
-    border: 0.1rem solid $lightGreyColor;
+    border: 0.1rem solid $midGreyColor;
     padding: 0.8rem;
-    border-top: none;
 }
 
 .side-bar-wrapper ul li {
     padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
+    padding-bottom: 0.4rem;
     cursor: pointer;
     font-size: 1rem;
 
-
 }
+
+
 
 .side-bar-wrapper ul li:hover {
     color: $blackColor;
 }
 
-.side-bar-wrapper ul .menu-active {
-    color: $midGreyColor;
-    cursor: auto;
+.side-bar-wrapper ul li .menu-link-wrapper {
 
-    &:hover {
-        color: $midGreyColor;
-    }
+    border-bottom: 0.1rem solid $midGreyColor;
 }
+
+.side-bar-wrapper ul li:last-child .menu-link-wrapper {
+
+    border-bottom: none;
+}
+
+
 
 .side-bar-wrapper ul li a {
 
@@ -46,11 +71,95 @@
 
 }
 
+.side-bar-wrapper ul li .menu-active {
+    color: $midGreyColor;
+    cursor: auto;
+
+    &:hover {
+        color: $midGreyColor;
+    }
+}
+
+.side-bar-wrapper .menu-toggle-btn-wrapper {
+    display: none;
+}
+
+
+
 @media (max-width: 991.98px) {
+    .side-bar-wrapper {
+        position: relative;
+    }
+
+    .side-bar-menu-wrapper {
+        position: absolute;
+        z-index: 10;
+        width: 100%;
+    }
+
+    .side-bar-wrapper .side-bar-menu-wrapper .side-bar-inner-wrapper2 {
+
+        margin-top: 0;
+
+    }
+
     .side-bar-wrapper ul li {
         float: left;
         margin-right: 0.8rem;
     }
+
+    .side-bar-wrapper .menu-toggle-btn-wrapper {
+        display: block;
+        padding-bottom: 1rem;
+    }
+
+    .side-bar-wrapper .menu-on {
+        display: block;
+    }
+
+    .side-bar-wrapper .menu-off {
+        display: none;
+    }
+
+    .side-bar-wrapper .accordion-trigger {
+
+        border: none;
+
+    }
+
+    .side-bar-wrapper ul li {
+        border-bottom: none;
+        margin-bottom: 0.4rem;
+        padding: 0;
+    }
+
+    .side-bar-wrapper ul li a {
+        color: $lighterGreyColor;
+        background-color: $blackColor;
+        padding: 0.3rem 0.5rem;
+        display: inline-block;
+
+        &:hover {
+            color: $lighterGreyColor;
+        }
+
+    }
+
+    .side-bar-wrapper ul li .menu-active {
+        color: $midGreyColor;
+        padding: 0.3rem 0.5rem;
+        display: inline-block;
+        background-color: $lightestGreyColor;
+        cursor: auto;
+
+        &:hover {
+            color: $midGreyColor;
+            background-color: $lightestGreyColor;
+        }
+    }
+
+
+
 }
 
 @media (max-width: 767.98px) {}

@@ -1,15 +1,29 @@
+.coworker-search-input-wrapper {
+    position: relative;
+}
+
+.clear-search-icon-times {
+    position: absolute;
+    cursor: pointer;
+    right: 0.8rem;
+    top: 0.2rem;
+}
+
 .co-worker-search-result {
     background-color: $whiteColor;
+    border: 0.1rem solid #ccc;
+    overflow-y: scroll;
+    height: 10rem;
     padding: 0.5rem;
 }
 
 .co-worker-search-result .result-entry-p {
-    background-color: $lighterGreyColor;
-    padding: 0.5rem;
     cursor: pointer;
+    padding: 0.5rem;
 
     &:hover {
         color: $blackColor;
+
     }
 
 }

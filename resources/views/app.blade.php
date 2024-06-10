@@ -33,7 +33,7 @@
     
      @inertiaHead
   </head>
-  <body>
+ <body>
     @inertia
     @if (app()->isLocal())
         <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
@@ -41,10 +41,9 @@
   </body>
     <script>
        let appDataObj = {
-       
         'appName': '{{env('APP_NAME')}}',
         'appEnv': '{{env('APP_ENV')}}',
+        'appBaseUrl': '{{env('APP_URL')}}',
        }
-   
     </script>
 </html>

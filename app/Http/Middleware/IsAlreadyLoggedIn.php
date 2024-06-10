@@ -17,11 +17,9 @@ class IsAlreadyLoggedIn
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next){
-        
-         if (Auth::check() &&  Auth::user()->role == 1) {
-            return redirect()->route("admin.dashboard");
-           }else if (Auth::check() && Auth::user()->role == 0) {
-            return redirect()->route("blog.index");
+
+         if (Auth::check()) {
+            return redirect()->route("home.index");
            }else{
             return $next($request);
           }

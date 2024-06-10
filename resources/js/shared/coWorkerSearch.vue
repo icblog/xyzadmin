@@ -1,15 +1,24 @@
 <template>
   <div class="coworker-search-wrapper">
-    <input
-      ref="searchInput"
-      v-model="searchedWord"
-      type="text"
-      class="form-control"
-      :placeholder="placeholderText"
-      maxlength="255"
-      autocomplete="off"
-      @keypress.enter.prevent
-    />
+    <div class="coworker-search-input-wrapper">
+      <input
+        ref="searchInput"
+        v-model="searchedWord"
+        type="text"
+        :class="{ 'form-control pr-5': true }"
+        :placeholder="placeholderText"
+        maxlength="255"
+        autocomplete="off"
+        @keypress.enter.prevent
+      />
+      <span
+        v-if="searchedWord.length > 0"
+        class="clear-search-icon-times"
+        @click="clearSearchInput"
+      >
+        <i class="fas fa-times"></i>
+      </span>
+    </div>
     <div class="co-worker-search-result" v-show="searchedWord != ''">
       <section v-show="searchData.isSearching">
         <LoadingIndicator loaderSize="small" />
@@ -32,14 +41,8 @@
 
         <div v-for="(coWorker, index) in searchData.coWorkerResData" :key="index">
           <p class="result-entry-p" @click="() => handleResultClicked(coWorker)">
-            {{ returnCoWorkerFullName(coWorker.fname, coWorker.lname) }}
+            {{ returnPtext(coWorker) }}
           </p>
-
-          <!-- <p class="result-entry-p">
-                  <AppLink :linkUrl="`/blog/category/${categoryEntry.slug}`">
-                    {{ limitString(60, coWorker.fname) + " " + limitString(60, coWorker.lname) }}
-                  </AppLink>
-                </p>-->
         </div>
       </section>
 
@@ -105,18 +108,34 @@ const props = defineProps({
   },
   placeholderText: {
     type: String,
-    default: "Search ....",
+    default: "Search co-worker ....",
+  },
+
+  end_point: {
+    type: String,
+    default: "/find-coworker",
   },
 
   noResultText: {
     type: String,
     default: "Sorry no result found, please try again thank you.",
   },
+  dataStringValue: {
+    type: String,
+    default: "name",
+  },
+  isGeneralData: {
+    type: Boolean,
+    default: false,
+  },
 });
 
+const clearSearchInput = () => {
+  searchedWord.value = "";
+};
+
 const handleResultClicked = (optionClciked) => {
-  if (props.makeResultAlink) {
-  } else {
+  if (!props.makeResultAlink) {
     //emit click result to parent
     emit("updateSelected", optionClciked);
   }
@@ -129,6 +148,14 @@ const searchData = reactive({
   coWorkerResData: [],
 });
 
+const returnPtext = (p_data) => {
+  if (props.isGeneralData) {
+    return p_data[props.dataStringValue];
+  } else {
+    return returnCoWorkerFullName(p_data.fname, p_data.lname);
+  }
+};
+
 const handleSearchForm = async (searchedWordValue) => {
   if (searchedWordValue != "") {
     searchData.isSearching = true;
@@ -138,7 +165,7 @@ const handleSearchForm = async (searchedWordValue) => {
     }
 
     try {
-      const res = await axios.post("/search-coworker", {
+      const res = await axios.post(props.end_point, {
         searchedword: searchedWordValue,
       });
 

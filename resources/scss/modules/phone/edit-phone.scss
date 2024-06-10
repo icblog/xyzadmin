@@ -1,0 +1,19 @@
+.edit-phone-input {
+    text-align: left;
+    border: none;
+    cursor: text !important;
+    background-color: $lightestGreyColor;
+
+    &:focus {
+        background-color: $lightestGreyColor;
+    }
+
+}
+
+
+
+@media (max-width: 991.98px) {}
+
+@media (max-width: 767.98px) {}
+
+@media (max-width: 575.98px) {}

@@ -10,24 +10,50 @@ export const returnSystemErrorMsg = () => {
   return "Sorry system error, your request can not be processed please see a member of the security team thank you!";
 };
 
-export const replaceChar = (str, whatTosearch, replaceWith) => {
-  return str.replace(whatTosearch, replaceWith);
+export const replaceChar = (str, what_to_search, replace_with) => {
+  return str.replace(what_to_search, replace_with);
 };
 
-export function limitString(limitBy, str) {
-  if (str.length > limitBy) {
-    return str.slice(0, limitBy) + "...";
+export function limitString(limit_by, str, add_dot = false) {
+  if (str.length > limit_by) {
+    if (add_dot) {
+      return str.slice(0, limit_by) + "...";
+    } else {
+      return str.slice(0, limit_by);
+    }
   } else {
     return str;
   }
+}
+
+export function generateRandom(ran_len = 6) {
+  let rand = Math.random().toString().replace("0.", "");
+  if (rand.length > ran_len) {
+    return rand.slice(0, ran_len);
+  } else {
+    return rand;
+  }
+}
+
+export function returnRefNumber(fName, lName) {
+  let refNumber = "",
+    fLetterOffName = limitString(1, fName),
+    fLetterOfLName = limitString(1, lName);
+
+  refNumber = fLetterOffName + fLetterOfLName + "-" + generateRandom(3);
+  return refNumber;
 }
 
 export function scrollToElement(elementRef) {
   elementRef.value.scrollIntoView({ behavior: "smooth" });
 }
 
-export function scrollToTopOfPage() {
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+export function scrollToTopOrBottomOfPage(top_or_bottom = "top") {
+  if (top_or_bottom == "top") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: document.body.scrollHeight, left: 0, behavior: "smooth" });
+  }
 }
 
 export function removeItemFromArrayByIndex(itemIndex, itemArray) {
@@ -84,12 +110,18 @@ export function removeItemFromArrayByValue(itemValue, itemArray) {
   return filteredArray;
 }
 
-export function returnFormattedDate(dateParam, dateWithTime = false) {
-  let returnDate = new Date(dateParam).toLocaleDateString();
-  if (dateWithTime) {
-    returnDate = returnDate + " " + new Date(dateParam).toLocaleTimeString("en-GB").slice(0, 5);
+export function returnFormattedDate(date_param, date_with_time = false, time_only = false) {
+  let return_date_or_time = new Date(date_param).toLocaleDateString();
+  if (date_with_time) {
+    return_date_or_time =
+      return_date_or_time + " " + new Date(date_param).toLocaleTimeString("en-GB").slice(0, 5);
   }
-  return returnDate;
+
+  if (time_only) {
+    return_date_or_time = date_param.substr(11, 5);
+  }
+
+  return return_date_or_time;
 }
 export function toSqlDatetime(inputDate) {
   // input looks like this { new Date()};
@@ -102,19 +134,41 @@ export function focusOnFirstInput(firstInput) {
   firstInput.value.focus();
 }
 
-export function generateRandom() {
-  return Math.random().toString().replace("0.", "");
-}
-
-export function returnResumeLink() {
-  return appDataObj.resumeLink;
-}
-
-export function returnFilteredText(text, listObj, filterBy) {
+export function returnFilteredText(text, listObj, filterBy, arrType = "obj") {
   if (!text.length) return listObj;
-  return listObj.filter((list) =>
-    list[filterBy].toLowerCase().includes(text.toLowerCase())
-  );
+  let tempArr = [];
+
+  if (arrType == "obj") {
+
+    listObj.forEach((element) => {
+      if (isNaN(element[filterBy])) {
+        if (element[filterBy].toLowerCase().indexOf(text.toLowerCase()) > -1) {
+          tempArr.push(element);
+        }
+      } else {
+        if (element[filterBy].toString().toLowerCase().indexOf(text.toLowerCase()) > -1) {
+          tempArr.push(element);
+        }
+      }
+    });
+    // return listObj.filter((list) =>
+    //   list[filterBy].toLowerCase().includes(text.toLowerCase())
+    // );
+  } else if (arrType == "arr") {
+    listObj.forEach((element) => {
+      if (isNaN(element)) {
+        if (element.toLowerCase().indexOf(text.toLowerCase()) > -1) {
+          tempArr.push(element);
+        }
+      } else {
+        if (element.toString().toLowerCase().indexOf(text.toLowerCase()) > -1) {
+          tempArr.push(element);
+        }
+      }
+    });
+  }
+
+  return tempArr;
 }
 
 export function capitalizeFirstLetter(string) {
@@ -151,32 +205,77 @@ export function validMobileNumber(number) {
   return result;
 }
 
-export function returnCoWorkerFullName(fname, lname) {
-  return fname + " " + lname;
-};
+export function validateEmail(inputValue) {
+  let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (inputValue.match(mailformat)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
-export function returnCurrentDate() {
-  const current = new Date();
-  return current.toDateString();
-};
+export function returnCoWorkerFullName(fname, lname) {
+  let first_name = fname == null ? "Leaver" : fname,
+    last_name = lname == null ? "" : lname;
+  return first_name + " " + last_name;
+}
+
+export function returnCurrentDate(to_string = true) {
+  const current_date = new Date();
+  if (to_string) {
+    return current_date.toDateString();
+  } else {
+    return current_date;
+  }
+
+
+}
 
 export function returnCurrentTime() {
-  const current = new Date();
-  return current.toLocaleTimeString("en-GB").slice(0, 5);
-};
+  const current_date = returnCurrentDate(false);
+  return current_date.toLocaleTimeString("en-GB").slice(0, 5);
+}
 
-export function generatePdf(jsPDF, autoTable, columnsArray, attrArray, dataObj, headerMsg = "Records", autoPrint = false) {
+export function returnFirstPartOfStrAfterChar(str, char = " ", pos = 0) {
+  return str.split(char)[pos];
+}
+
+export function returnAllStrAfterFirstChar(str, char = " ") {
+  return str.slice(str.indexOf(char) + 1);
+}
+
+
+
+export function returnReturnMinDateAsToday() {
+  let dtToday = returnCurrentDate(false), //find this function above.
+    month = dtToday.getMonth() + 1,
+    day = dtToday.getDate(),
+    year = dtToday.getFullYear();
+  if (month < 10) {
+    month = "0" + month.toString();
+  }
+  if (day < 10) {
+    day = "0" + day.toString();
+  }
+  return year + "-" + month + "-" + day;
+}
+
+export function generatePdf(
+  jsPDF,
+  autoTable,
+  columnsArray,
+  attrArray,
+  dataObj,
+  headerMsg = "Records",
+  autoPrint = false
+) {
   // Create a new PDF document
   let doc = new jsPDF("l", "pt"),
     rows = [],
     currentDateTime = "Date: " + returnCurrentDate() + " Time: " + returnCurrentTime(),
-    header =
-      "  |  (" +
-      dataObj.length +
-      ") " + headerMsg;
+    header = "  |  (" + dataObj.length + ") " + headerMsg;
 
   dataObj.forEach((visitor, i) => {
-
     let temParr = [];
 
     for (let i = 0; i < attrArray.length; i++) {
@@ -184,7 +283,6 @@ export function generatePdf(jsPDF, autoTable, columnsArray, attrArray, dataObj, 
     }
 
     rows.push(temParr);
-
   });
 
   doc.autoTable({
@@ -222,9 +320,7 @@ export function generatePdf(jsPDF, autoTable, columnsArray, attrArray, dataObj, 
     doc.autoPrint();
   }
   doc.output("dataurlnewwindow");
-
-};
-
+}
 
 export function returnSortOptionArray() {
   return [
@@ -245,11 +341,21 @@ export function returnSortOptionArray() {
     {
       name: "Date descending",
     },
-    // {
-    //   name: "Company",
-    // },
-    // {
-    //   name: "Reason",
-    // },
   ];
-};
+}
+
+export function checkDateDiff(inputDateTime, daysValue) {
+  //Set 1 day in milliseconds
+  let one_day = 1000 * 60 * 60 * 24,
+    serverDateTime = new Date(inputDateTime),
+    newDate = new Date();
+
+  //Calculate difference btw the two dates, and convert to days
+  let diff = Math.ceil((newDate.getTime() - serverDateTime.getTime()) / one_day);
+  if (diff >= daysValue) {
+    return true;
+  } else {
+    return false;
+  }
+}
+

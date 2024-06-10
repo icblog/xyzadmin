@@ -2,7 +2,7 @@
   <div v-if="dot" :class="classNameValue"><div :class="loaderSize">..........</div></div>
   <div v-if="!dot" :class="classNameValue">
     <div :class="loaderSize"><i class="fas fa-spinner fa-spin"></i></div>
-    <p :class="loaderPSizeClassName">Please wait...</p>
+    <p v-show="showBelowText" :class="loaderPSizeClassName">Please wait...</p>
   </div>
 </template>
 
@@ -36,6 +36,10 @@ const props = defineProps({
   loaderPSizeClassName: {
     type: String,
     default: "",
+  },
+  showBelowText: {
+    type: Boolean,
+    default: true,
   },
 });
 

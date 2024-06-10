@@ -11,7 +11,7 @@
 	font-family: $hfontFamily;
 	padding: 0;
 	margin: 0;
-	font-size: 1.6rem;
+	font-size: 1rem !important;
 	text-transform: uppercase !important;
 	color: $blackColor !important;
 
@@ -21,26 +21,27 @@
 	}
 }
 
-
-
+.logo-span {
+	color: $primaryColor !important;
+	font-size: 1.8rem !important;
+}
 
 @media (max-width: 1280px) {}
 
 @media (max-width: 991.98px) {
-
-	.logo-wrapper a {
-		font-size: 1.4rem;
-	}
+	// .logo-wrapper a {
+	// 	font-size: 1.4rem;
+	// }
 }
 
 @media (max-width: 767.98px) {
-	.logo-wrapper a {
-		font-size: 1.2rem;
-	}
+	// .logo-wrapper a {
+	// 	font-size: 1.2rem;
+	// }
 }
 
 @media (max-width: 575.98px) {
-	.logo-wrapper a {
-		font-size: 1.1rem;
-	}
+	// .logo-wrapper a {
+	// 	font-size: 1.1rem;
+	// }
 }

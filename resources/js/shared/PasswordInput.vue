@@ -8,7 +8,7 @@
     class="login-pwd form-control"
     maxlength="30"
     autocomplete="off"
-    required
+    @focus="() => inputFocusFunc(inputName)"
   />
   <div class="password-visible-btn input-group-append">
     <span
@@ -30,7 +30,19 @@ const togglePasswordVisibilty = () => {
 };
 
 const props = defineProps({
-  modelValue: String,
+  modelValue: {
+    type: String,
+    default: "",
+  },
+  inputName: {
+    type: String,
+    default: "password",
+  },
+
+  inputFocusFunc: {
+    type: Function,
+    default: () => {},
+  },
 });
 
 const emit = defineEmits();

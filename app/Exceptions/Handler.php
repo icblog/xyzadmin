@@ -58,7 +58,4 @@ class Handler extends ExceptionHandler
     return $response;
 }
 
-
-
-
 }

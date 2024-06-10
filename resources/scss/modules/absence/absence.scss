@@ -1,0 +1,83 @@
+.absence-total-department-wrapper {
+    overflow: auto;
+    white-space: nowrap;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+.absence-total-department-wrapper button {
+    margin-right: 0.3rem;
+    color: $baseColor;
+    cursor: text !important;
+}
+
+.absence-total-department-wrapper button.department-absence-total-morethan-zerobtn {
+    background-color: $midGreyColor;
+    color: $blackColor;
+    cursor: pointer !important;
+
+    &:hover {
+        background-color: $lightGreyColor;
+    }
+}
+
+.absence-result-wrapper {
+    border: 0.1rem solid $midGreyColor;
+}
+
+.responsible-told-badge {
+    background-color: rgba(161, 161, 18, 0.772);
+    display: inline-block;
+    padding: 0.3rem;
+}
+
+.work-related-badge {
+    background-color: rgb(187, 13, 13);
+    display: inline-block;
+    padding: 0.3rem;
+}
+
+.phones-p {
+    font-size: 1.1rem;
+    line-height: 0.6rem;
+}
+
+.department-search-option-wrapper .option-select-input-outer-wrapper {
+    margin-top: -1.9rem !important;
+}
+
+.view-absence-search-wrapper {
+    background-color: $whiteColor;
+    border: 0.1rem solid $blackColor;
+    padding: 0.8rem 0.6rem;
+    margin-bottom: 1rem;
+    margin-top: 0.2rem;
+}
+
+
+
+.work-related-reset-btn {
+    display: inline-block;
+    padding: 0.1rem 0.6rem;
+    font-size: 0.8rem;
+    background-color: $baseColor;
+    color: $whiteColor;
+    margin-left: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+@media (max-width: 991.98px) {}
+
+@media (max-width: 767.98px) {}
+
+@media (max-width: 575.98px) {
+    .view-absence-search-wrapper {
+        margin-top: 1rem;
+        margin-left: 0.3em;
+        margin-right: 0.3rem;
+    }
+}

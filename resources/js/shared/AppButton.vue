@@ -17,6 +17,7 @@
       [appBtnData.defaultClassName]: true,
     }"
     @click="btnFunc"
+    :disabled="btnDisabled"
   >
     <slot />
   </button>
@@ -24,6 +25,7 @@
     :class="customClassObj != null ? customClassObj : customClass"
     v-show="noBtnStyle"
     @click="btnFunc"
+    :disabled="btnDisabled"
   >
     <slot />
   </button>
@@ -57,6 +59,10 @@ const props = defineProps({
   },
 
   fullBtn: {
+    type: Boolean,
+    default: false,
+  },
+  btnDisabled: {
     type: Boolean,
     default: false,
   },

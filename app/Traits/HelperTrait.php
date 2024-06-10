@@ -22,10 +22,10 @@ public function returnLinkErrMsg(){
 	return "Sorry the link has expired or Invalid,  you will be redirected to create a new one thank you.";
 }//End returnGenericSystemErrMsg
 
-public function sendAlinkToUser($token,$email,$action,$subject,$emailTemplate){
+public function sendAlinkToUser($token,$email,$subject,$emailTemplate){
   $outComeArray = array("error"=>"", "outcome"=>"");
  
-  $verifyLink = env('APP_URL')."/verify/".$token."/".$action;
+  $verifyLink = env('APP_URL')."/verify/".$token;
   
   $dataArray = array(
       "name"=>"",
@@ -45,6 +45,81 @@ public function sendAlinkToUser($token,$email,$action,$subject,$emailTemplate){
   }
 
 }// End sendAlinkToUser
+
+public function sendRegEmail($fname,$username,$email,$password,$subject,$emailTemplate){
+  $outComeArray = array("error"=>"", "outcome"=>"");
+ 
+   $dataArray = array(
+      "name"=>$fname,
+      "username"=>$username,
+      "email"=>$email,
+      "password"=>$password,
+     
+  );
+   //convert data array into data object for blade view
+  $dataObj = (object)$dataArray;
+  try {
+
+      Mail::to($email)->send(new AppMail($subject,$emailTemplate,$dataObj));
+      $outComeArray["outcome"] = true; 
+      return $outComeArray;
+
+  } catch (\Exception $e) { 
+    $outComeArray["error"] = true; 
+    return $outComeArray;
+  }
+
+}// End sendRegEmail
+
+public function sendAbsenceEmail(
+  $msg_type,
+  $fname,
+  $called_date,
+  $called_time,
+  $date_for,
+  $shift_start_time,
+  $shift_end_time,
+  $ref_number,
+  $reason,
+  $work_related,
+  $comment,
+  $co_worker_name,
+  $subject,
+  $emailTemplate,
+  $email_address
+  ){
+  $outComeArray = array("error"=>"", "outcome"=>"");
+ 
+  $dataArray = array(
+    'msg_type' => $msg_type,
+    'name' => $fname, 
+    'date'=> $called_date,
+    'time'=> $called_time,
+    'date_for'=> $date_for,
+    'shift_start_time'=> $shift_start_time,
+    'shift_end_time'=> $shift_end_time,
+    'reference_number'=> $ref_number,
+    'absence_reason'=> $reason,
+    'work_related'=> $work_related,
+    'comment'=> $comment,
+    'co_worker_name'=> $co_worker_name,
+ );
+   //convert data array into data object for blade view
+  $dataObj = (object)$dataArray;
+  try {
+
+      Mail::to($email_address)->send(new AppMail($subject,$emailTemplate,$dataObj));
+      $outComeArray["outcome"] = true; 
+      return $outComeArray;
+
+  } catch (\Exception $e) { 
+    $outComeArray["error"] = true; 
+    return $outComeArray;
+  }
+
+}// End sendAsenceEmail
+
+
 
 public function checkIsEmail($email){
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -110,6 +185,18 @@ public function randomNumber($length = 6){
 	  $unixdatetime = strtotime($datetime); 
 	  return strftime("%B %d, %Y at %I:%M %p", $unixdatetime);
     }
+
+    public function returnDate($datetime=""){
+      
+      if($datetime == ''){
+        return date("D, d M Y",strtotime($this->returnTimeStamp()));
+      }else{
+        return date("D, d M Y",strtotime($datetime));
+      }
+      
+    }
+
+    
 
     public function validatePhone($phoneNumber){
       $res = preg_match('/^(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}$/',$phoneNumber);
