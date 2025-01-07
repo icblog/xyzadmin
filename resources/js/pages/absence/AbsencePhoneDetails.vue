@@ -1,8 +1,8 @@
 <template>
-  <!-- <div class="text-right pb-2">
+  <div class="text-right pb-2">
     <AppButton :btnFunc="closeModal" btnStyle="primary">X</AppButton>
   </div>
-  <hr /> -->
+  <hr />
   <div v-if="view_phone_res_data.data_length > 0">
     <LocalSearch
       :oldResultObj="view_phone_res_data.default_phone_res"
@@ -82,9 +82,9 @@ const view_phone_res_data = reactive({
   current_active_accordion_index: null,
 });
 
-// const closeModal = () => {
-//   emit("handleModalClose");
-// };
+const closeModal = () => {
+  emit("handleModalClose");
+};
 
 const updateLocalViewPhoneResultSet = (res_obj) => {
   view_phone_res_data.view_phone_res = res_obj.arrObj;

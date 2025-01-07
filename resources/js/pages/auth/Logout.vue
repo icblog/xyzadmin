@@ -1,6 +1,6 @@
 <template>
   <Layout pageTitle="user-logout" pageIntro="logout">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row pt-4">
         <div class="col-md-7 mx-auto pt-4">
           <div class="form-wrapper">

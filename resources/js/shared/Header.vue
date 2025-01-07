@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <header>
+  <header>
+    <div class="container">
       <div class="row">
         <div class="col">
           <Logo />
@@ -12,14 +12,15 @@
           <h5 class="date-time">Time: {{ currentTimeStampData.currentTime }}</h5>
         </div>
       </div>
-      <hr />
-      <div class="row">
-        <div class="col-md-6 mx-auto text-center">
-          <h5 class="date-time">{{ pageIntro }}</h5>
-        </div>
+    </div>
+  </header>
+
+  <div class="container pt-1">
+    <div class="row justify-content-end pt-5 pb-3 text-center">
+      <div class="col-9">
+        <h5>{{ pageIntro }}</h5>
       </div>
-      <hr />
-    </header>
+    </div>
   </div>
 </template>
 

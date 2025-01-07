@@ -2,7 +2,7 @@
   <title>
     {{ appName + " | verify-link" }}
   </title>
-  <div class="container pb-5">
+  <div class="container-fluid pb-5">
     <div class="row">
       <div class="col-md-7 mx-auto">
         <div class="text-center pt-5 pb-3">

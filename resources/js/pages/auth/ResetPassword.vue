@@ -1,6 +1,6 @@
 <template>
   <Layout pageTitle="user-reset-password" pageIntro="Reset password">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row pt-4">
         <div class="col-md-7 mx-auto pt-4">
           <HandleMsg
@@ -78,7 +78,9 @@
                 <p class="small">All fields marked with a * are mandatory</p>
 
                 <div class="pt-3 text-center">
-                  <AppButton :fullBtn="true" btnType="submit" btnStyle="primary">Submit</AppButton>
+                  <AppButton :fullBtn="true" btnType="submit" btnStyle="primary"
+                    >Submit</AppButton
+                  >
                 </div>
               </form>
             </section>

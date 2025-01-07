@@ -47,6 +47,8 @@ use App\Http\Controllers\KeyLog\KeyLogController;
 //Key Storage IMPORT
 use App\Http\Controllers\KeyStorage\KeyStorageController;
 
+//Temp offsite
+use App\Http\Controllers\TempOffsite\TempOffsiteController;
 
 //EMAILTEST 
 use App\Http\Controllers\EmailTest\EmailTestController;
@@ -92,6 +94,8 @@ Route::get('/', [HomeController::class, 'index'])->name("home.index")->middlewar
 Route::get('/home', [HomeController::class, 'index'])->name("home.index")->middleware('isUser');
 
 // ==========USER ROUTE===========//
+Route::get('/user/add-coworker', [UserController::class, 'addCoworkerIndex'])->name("addcoworker.index")->middleware("isAdmin");
+Route::get('/user/add-contractor', [UserController::class, 'addContractorIndex'])->name("addcontractor.index")->middleware("isAdmin");
 Route::get('/add-user', [UserController::class, 'addUserIndex'])->name("adduser.index")->middleware("isAdmin");
 Route::get('/edit-user', [UserController::class, 'editUserIndex'])->name("edit.index")->middleware("isAdmin");
 Route::match(['get', 'post'], '/view-users', [UserController::class, 'viewUsersIndex'])->name("viewusers.index")->middleware('isUser');
@@ -131,6 +135,7 @@ Route::post('/absence/delete-reason', [CommonAbsenceReasonController::class, 'de
 // ==========ABSENCE ROUTE===========//
 Route::match(['get', 'post'], '/absence', [AbsenceController::class, 'index'])->name('viewabsence.index')->middleware('isUser');
 Route::get('/absence/add', [AbsenceController::class, 'absenceAdd'])->middleware('isUser');
+Route::post('/absence/find-user', [AbsenceController::class, 'absenceFindUser'])->middleware('isUser');
 Route::post('/absence/store', [AbsenceController::class, 'store'])->middleware('isUser');
 Route::post('/get-coworkers-and-phones', [AbsenceController::class, 'getCoworkersAndPhones'])->middleware('isUser');
 Route::post('/update-absence-responsible-told', [AbsenceController::class, 'updateAbsenceResponsibleTold'])->middleware('isUser');
@@ -172,6 +177,14 @@ Route::match(['get', 'post'], '/keys/storage', [KeyStorageController::class, 'in
 Route::post('/keys/add-storage', [KeyStorageController::class, 'save'])->middleware('isUser');
 Route::post('/keys/update-storage', [KeyStorageController::class, 'update'])->middleware('isUser');
 Route::post('/keys/delete-storage', [KeyStorageController::class, 'delete'])->middleware('isUser');
+
+// ============CURRENT TEMP OFFSITE ROUTE==========//
+Route::match(['get', 'post'], '/tempoffsite/view', [TempOffsiteController::class, 'index'])->name('viewtempoffsite.index')->middleware('isUser');
+Route::get('/tempoffsite/current', [TempOffsiteController::class, 'currentTempOffsiteIndex'])->name('currenttempoffsite.index')->middleware('isUser');
+Route::post('/tempoffsite/sort', [TempOffsiteController::class, 'sortCurrentTempOffsite'])->middleware('isUser');
+Route::post('/tempoffsite/sign-in', [TempOffsiteController::class, 'tempOffsiteSignIn'])->middleware('isUser');
+
+
 //Remove this at later date
 Route::get("/email", [EmailTestController::class, 'index']);
 Route::post('/reset-current-visitor', [VisitorsController::class, 'resetCurrentVisitor'])->name("resetcurrentvisitor")->middleware('isUser');

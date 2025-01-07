@@ -1,7 +1,7 @@
 <template>
   <Layout pageTitle="current-visitors" pageIntro="Current visitors">
     <div class="container-wrapper">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <SideBar :currentlyActiveIndex="1" />
@@ -47,8 +47,8 @@
                     customClass="ml-2 primary-btn"
                     :btnFunc="printAllVisitors"
                   >
-                    Print all</AppButton
-                  >
+                    <i class="fas fa-print"></i
+                  ></AppButton>
                 </div>
               </div>
 
@@ -88,20 +88,26 @@
             </section>
             <section
               v-show="
-                currentVisitorsData.customErr == '' &&
-                currentVisitorsData.dataLength <= 0 &&
-                currentVisitorsData.isFetchingDataComplete
+                currentVisitorsData.customErr == '' && currentVisitorsData.dataLength <= 0
               "
             >
               <div class="row">
-                <div class="col-md-12 text-center">
-                  <section v-if="currentVisitorsData.isPageReseting">
+                <div class="col-md-12">
+                  <HandleMsg
+                    infotype="info"
+                    msg="There are no visitors on site at the moment"
+                    customClass="no-border"
+                  />
+                </div>
+
+                <!-- <div class="col-md-12 text-center">
+                  <div v-if="currentVisitorsData.isPageReseting">
                     <LoadingIndicator />
-                  </section>
-                  <section v-else>
+                  </div>
+                  <div v-else>
                     <HandleMsg
                       infotype="info"
-                      msg="No visitors on site"
+                      msg="There are no visitors on site at the moment"
                       customClass="no-border"
                     />
                     <AppButton
@@ -111,8 +117,8 @@
                     >
                       Reset Data
                     </AppButton>
-                  </section>
-                </div>
+                  </div>
+                </div> -->
               </div>
               <!-- end row -->
             </section>
@@ -149,23 +155,19 @@ const optionSelectArr = returnSortOptionArray();
 
 const props = defineProps({
   errors: Object,
-  pageName: {
-    type: String,
-    default: "",
-  },
+
   currentVisitorsRes: {},
 });
 
 const currentVisitorsData = reactive({
   oldVisitorsRes: props.currentVisitorsRes,
   currentVisitorsRes: props.currentVisitorsRes,
-  currentlyActiveIndex: null,
   dataLength: props.currentVisitorsRes.length,
   customErr: props.errors?.fail == undefined ? "" : props.errors?.fail,
   optionSelected: "Latest",
   isFetchingDataComplete: false,
   //remove isPageReseting at later date
-  isPageReseting: false,
+  //isPageReseting: false,
   isSorting: false,
 });
 
@@ -194,7 +196,7 @@ const sortCurrentVisitor = async (selectedSortOption) => {
   }
 };
 
-const updateSelectedOptionInput = async (selectedSortOption) => {
+const updateSelectedOptionInput = (selectedSortOption) => {
   currentVisitorsData.isSorting = true;
   sortCurrentVisitor(selectedSortOption);
 };
@@ -249,7 +251,8 @@ const printAllVisitors = () => {
       attrArr,
       currentVisitorsData.oldVisitorsRes,
       "Current visitors or contractors on site",
-      true
+      true,
+      ["sign_in"]
     );
   }, 1000);
 };
@@ -258,8 +261,11 @@ const refreshResult = () => {
   let time,
     events = ["click", "mousedown", "mousemove", "keypress", "scroll", "touchstart"];
   function doPageUpdate() {
-    sortCurrentVisitor(currentVisitorsData.optionSelected);
-  }
+    //Only update the page if user is on it.
+    if (window.location.href.includes("/current-visitor")) {
+      sortCurrentVisitor("Latest");
+    } //end if window
+  } // end do page update
 
   function resetTimer() {
     clearInterval(time);
@@ -274,24 +280,24 @@ const refreshResult = () => {
 };
 
 //FOR TESTING TO BE REMOVE AT A LATER DATE
-const resetPageData = async () => {
-  currentVisitorsData.isPageReseting = true;
-  try {
-    const res = await axios.post("/reset-current-visitor");
+// const resetPageData = async () => {
+//   currentVisitorsData.isPageReseting = true;
+//   try {
+//     const res = await axios.post("/reset-current-visitor");
 
-    if (res?.data?.error != "") {
-      currentVisitorsData.customErr = res.data.error;
-    } else {
-      currentVisitorsData.currentVisitorsRes = res?.data?.currentVisitorsResult;
-      currentVisitorsData.oldVisitorsRes = res?.data?.currentVisitorsResult;
-      currentVisitorsData.dataLength = res?.data?.currentVisitorsResult.length;
-    }
-  } catch (err) {
-    currentVisitorsData.customErr = returnSystemErrorMsg();
-  } finally {
-    currentVisitorsData.isPageReseting = false;
-  }
-};
+//     if (res?.data?.error != "") {
+//       currentVisitorsData.customErr = res.data.error;
+//     } else {
+//       currentVisitorsData.currentVisitorsRes = res?.data?.currentVisitorsResult;
+//       currentVisitorsData.oldVisitorsRes = res?.data?.currentVisitorsResult;
+//       currentVisitorsData.dataLength = res?.data?.currentVisitorsResult.length;
+//     }
+//   } catch (err) {
+//     currentVisitorsData.customErr = returnSystemErrorMsg();
+//   } finally {
+//     currentVisitorsData.isPageReseting = false;
+//   }
+// };
 
 onMounted(() => {
   refreshResult();

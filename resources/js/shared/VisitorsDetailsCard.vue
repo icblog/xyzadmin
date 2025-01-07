@@ -24,7 +24,7 @@
             <td v-show="showSignOut" data-label="Signed out">
               <span>{{
                 visitor.sign_out == null
-                  ? "-"
+                  ? "---"
                   : returnFormattedDate(visitor.sign_out, true)
               }}</span>
             </td>
@@ -38,7 +38,7 @@
               <span>{{ visitor.visiting }}</span>
             </td>
 
-            <td v-show="showBtn" data-label="">
+            <td v-show="showBtn" data-label="" class="pt-3 pb-3">
               <AppButton
                 customClass="primary-btn"
                 :btnFunc="() => handleSignOutVisitor(visitor.id)"

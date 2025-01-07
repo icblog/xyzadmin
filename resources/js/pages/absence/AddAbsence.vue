@@ -1,7 +1,7 @@
 <template>
   <Layout pageTitle="add-absence" pageIntro="Add absence">
     <div class="container-wrapper">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <SideBar :currentlyActiveIndex="2" />
@@ -47,6 +47,7 @@
                     <label class="form-label" for="coworker-name">Co-worker name* </label>
                     <CoWorkerSearch
                       :makeResultAlink="false"
+                      end_point="/absence/find-user"
                       resultFoundTextSingular="person"
                       resultFoundTextplural="people"
                       noResultText="Sorry no one found, try again thank you."
@@ -381,10 +382,10 @@
                         </div>
                         <div class="col-md-6 pt-5">
                           <AppButton
-                            :btnFunc="togglePhones"
+                            :btnFunc="handleShowPhones"
                             customClass="change-selected-btn"
                           >
-                            {{ addAbsentData.show_phones ? "Hide" : "Show" }} phones
+                            Show phones
                           </AppButton>
                           <!-- end div col-md-6 -->
                         </div>
@@ -405,15 +406,6 @@
                             />
                           </div>
                           <!-- end div col-md-6 -->
-                        </div>
-
-                        <div v-show="addAbsentData.show_phones" class="col-md-12">
-                          <div class="pt-2 box-shadow">
-                            <AbsencePhoneDetails
-                              v-if="addAbsentData.depart_phone_cowokers_fetched"
-                              :view_phone_res="addAbsentData.depart_phones"
-                            />
-                          </div>
                         </div>
                         <!-- end row-->
                       </div>
@@ -479,7 +471,7 @@
       <!-- end container wrapper -->
     </div>
     <!-- MODAL GOES HERE -->
-    <!-- <Modal :showModal="addAbsentData.show_phones" :showCloseBtn="false">
+    <Modal :showModal="addAbsentData.show_modal" :showCloseBtn="false">
       <template v-slot:c-modal-content>
         <AbsencePhoneDetails
           v-if="addAbsentData.depart_phone_cowokers_fetched"
@@ -487,7 +479,7 @@
           @handleModalClose="handleModalClose"
         />
       </template>
-    </Modal> -->
+    </Modal>
   </Layout>
 </template>
 <script setup>
@@ -549,7 +541,7 @@ const addAbsentData = reactive({
     shift_start_time_err: "",
     shift_end_time_err: "",
   },
-  show_phones: false,
+  show_modal: false,
   is_add_absence_form_processing: false,
   custom_err: "",
   custom_success: "",
@@ -562,12 +554,13 @@ const addAbsentData = reactive({
   save_err: false,
   cancel_success_timer: false,
 });
-const togglePhones = () => {
-  addAbsentData.show_phones = !addAbsentData.show_phones;
+
+const handleShowPhones = () => {
+  addAbsentData.show_modal = true;
 };
-// const handleModalClose = () => {
-//   addAbsentData.show_phones = false;
-// };
+const handleModalClose = () => {
+  addAbsentData.show_modal = false;
+};
 
 const updateSuccessCancelTimer = () => {
   addAbsentData.cancel_success_timer = true;
@@ -717,7 +710,7 @@ const updateSelectedCoworker = (selected_coworker) => {
     selected_coworker.fname,
     selected_coworker.lname
   );
-  addAbsentData.formData.department_id = selected_coworker.department;
+  addAbsentData.formData.department_id = selected_coworker.department_company;
   addAbsentData.formData.co_worker_email = selected_coworker.email;
   getCoworkersAndPhones();
 };

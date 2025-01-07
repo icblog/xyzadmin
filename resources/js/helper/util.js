@@ -267,7 +267,8 @@ export function generatePdf(
   attrArray,
   dataObj,
   headerMsg = "Records",
-  autoPrint = false
+  autoPrint = false,
+  dateAttrArray = [],
 ) {
   // Create a new PDF document
   let doc = new jsPDF("l", "pt"),
@@ -279,10 +280,22 @@ export function generatePdf(
     let temParr = [];
 
     for (let i = 0; i < attrArray.length; i++) {
-      temParr.push(visitor[attrArray[i]]);
-    }
 
+      if (dateAttrArray.length > 0) {
+        //for date attr
+        if (dateAttrArray.includes(attrArray[i]) && visitor[attrArray[i]] != null) {
+          temParr.push(returnFormattedDate(visitor[attrArray[i]], true));
+        } else {
+          temParr.push(visitor[attrArray[i]]);
+        }
+
+      } else {
+        temParr.push(visitor[attrArray[i]]);
+      }//end if dateAttrArray.length > 0
+
+    }//end foreach
     rows.push(temParr);
+
   });
 
   doc.autoTable({

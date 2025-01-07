@@ -2,7 +2,7 @@
   <title>
     {{ appName + " | " + title }}
   </title>
-  <div class="container pb-5">
+  <div class="container-fluid pb-5">
     <div class="row">
       <div class="col-md-10 mx-auto">
         <div class="pt-2 pb-5">

@@ -1,7 +1,7 @@
 <template>
   <Layout pageTitle="view-users" pageIntro="View users">
     <div class="container-wrapper">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <SideBar :currentlyActiveIndex="0" />
@@ -104,7 +104,8 @@
                         </li>
 
                         <li>
-                          Department:
+                          {{ user.is_depart_or_comp == 0 ? "Department:" : "Company:" }}
+
                           <span>{{ user.department_name }}</span>
                         </li>
 
@@ -129,6 +130,10 @@
                           <span>{{ user.role === 0 ? "User" : "Admin" }}</span>
                         </li>
                         <li>
+                          Badge id:
+                          <span>{{ user.badge_id }}</span>
+                        </li>
+                        <li>
                           Locker:
                           <span class="locker-name-number">{{
                             user.locker_name === null ? "----" : user.locker_name
@@ -140,7 +145,7 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="col-2 pt-5 pr-3">
+                    <div class="col-2 pt-5">
                       <!-- start delete btn -->
 
                       <span v-show="$page.props.isAdmin">
@@ -172,6 +177,15 @@
                         </AppButton>
                       </span>
                       <!-- end delete btn -->
+                      <span>
+                        <AppLink
+                          className="btn-primary btn no-border-radius ml-2"
+                          linkUrl="/edit-user"
+                        >
+                          <span>
+                            <i class="fas fa-edit"></i>
+                          </span> </AppLink
+                      ></span>
                     </div>
 
                     <!-- end row -->
@@ -215,6 +229,7 @@ import SideBar from "../../shared/SideBar";
 import HandleMsg from "../../shared/HandleMsg";
 import OptionElementInput from "../../shared/OptionElementInput";
 import AppButton from "../../shared/AppButton";
+import AppLink from "../../shared/AppLink";
 import LoadingIndicator from "../../shared/LoadingIndicator";
 
 import {
@@ -228,7 +243,7 @@ import axios from "../../api/axios";
 import { debounce } from "lodash";
 
 const search_word = ref("");
-const option_select_arr = ["Latest", "A-Z", "Z-A"];
+const option_select_arr = ["Latest", "A-Z", "Z-A", "Department", "Company"];
 
 const props = defineProps({
   errors: Object,

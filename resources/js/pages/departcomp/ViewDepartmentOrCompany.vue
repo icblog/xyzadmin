@@ -4,7 +4,7 @@
     pageIntro="View or Edit department/company"
   >
     <div class="container-wrapper">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <SideBar :currentlyActiveIndex="4" />

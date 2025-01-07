@@ -1,7 +1,7 @@
 <template>
   <Layout pageTitle="edit-user" pageIntro="Edit user">
     <div class="container-wrapper">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <SideBar :currentlyActiveIndex="0" />
@@ -147,10 +147,31 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
+                          <label class="form-label" for="phone">Badge id*</label>
+                          <div
+                            class="text-danger small"
+                            v-show="editUserFormData.errors.badge_id_err != ''"
+                          >
+                            {{ editUserFormData.errors.badge_id_err }}
+                          </div>
+                          <input
+                            v-model="editUserFormData.form_data.badge_id"
+                            type="text"
+                            class="form-control"
+                            maxlength="11"
+                            autocomplete="off"
+                            @focus="() => removeEditFormError('badge_id')"
+                          />
+                        </div>
+                        <!-- end col-md-6 -->
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
                           <OptionElementInput
                             v-if="departmentRes.length > 0"
                             whatToget="id"
-                            labelName="Department*"
+                            labelName="Department/Company*"
+                            itemToHide="All department"
                             :inputErrMsg="editUserFormData.errors.department"
                             :defaultOptionSelected="
                               editUserFormData.option_selected_value
@@ -164,11 +185,12 @@
                         <!-- end col-md-6 -->
                       </div>
                       <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="form-label pr-3">Is user a leader?*</label>
-
-                          <div class="pl-5 ml-3">
+                        <div class="form-group pt-2">
+                          <div>
                             <div class="form-check-inline">
+                              <span class="form-label bolded text-color-black pr-3"
+                                >Is user a leader?*</span
+                              >
                               <span class="form-check-label">
                                 <input
                                   type="radio"
@@ -200,20 +222,62 @@
                         </div>
                         <!-- end col-md-6 -->
                       </div>
-
                       <div class="col-md-6">
+                        <div class="form-group pt-2">
+                          <div>
+                            <div class="form-check-inline">
+                              <span class="form-label bolded text-color-black pr-3"
+                                >Current role*</span
+                              >
+                              <span class="form-check-label">
+                                <input
+                                  type="radio"
+                                  class="form-check-input"
+                                  id="no"
+                                  :value="0"
+                                  :checked="
+                                    editUserFormData.form_data.user_role === 0
+                                      ? true
+                                      : false
+                                  "
+                                  v-model="editUserFormData.form_data.user_role"
+                                />User
+                              </span>
+                            </div>
+                            <div class="form-check-inline">
+                              <span class="form-check-label">
+                                <input
+                                  type="radio"
+                                  class="form-check-input"
+                                  id="yes"
+                                  :value="1"
+                                  :checked="
+                                    editUserFormData.form_data.user_role === 1
+                                      ? true
+                                      : false
+                                  "
+                                  v-model="editUserFormData.form_data.user_role"
+                                />Admin
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- end col-md-6 -->
+                      </div>
+
+                      <div class="col-md-12 pt-4">
                         <div class="form-group">
-                          <label class="form-label pr-3"
-                            >Give user access to ic-admin app?*</label
-                          >
                           <div
                             v-show="editUserFormData.errors.xyz_app_access_err != ''"
                             class="small text-danger p-0 m-0"
                           >
                             {{ editUserFormData.errors.xyz_app_access_err }}
                           </div>
-                          <div class="pl-5 ml-3">
+                          <div>
                             <div class="form-check-inline">
+                              <span class="form-label bolded text-color-black pr-3"
+                                >Give user access to ic-admin app?*</span
+                              >
                               <span class="form-check-label">
                                 <input
                                   type="radio"
@@ -252,49 +316,10 @@
                         <!-- end col-md-6 -->
                       </div>
 
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="form-label pr-3">Current role* </label>
-
-                          <div class="pl-5 ml-3">
-                            <div class="form-check-inline">
-                              <span class="form-check-label">
-                                <input
-                                  type="radio"
-                                  class="form-check-input"
-                                  id="no"
-                                  :value="0"
-                                  :checked="
-                                    editUserFormData.form_data.user_role === 0
-                                      ? true
-                                      : false
-                                  "
-                                  v-model="editUserFormData.form_data.user_role"
-                                />User
-                              </span>
-                            </div>
-                            <div class="form-check-inline">
-                              <span class="form-check-label">
-                                <input
-                                  type="radio"
-                                  class="form-check-input"
-                                  id="yes"
-                                  :value="1"
-                                  :checked="
-                                    editUserFormData.form_data.user_role === 1
-                                      ? true
-                                      : false
-                                  "
-                                  v-model="editUserFormData.form_data.user_role"
-                                />Admin
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- end col-md-6 -->
-                      </div>
                       <div class="col-md-12">
-                        <p class="small">All fields marked with a * are mandatory</p>
+                        <p class="small text-center">
+                          All fields marked with a * are mandatory
+                        </p>
                         <!-- end col-md-6 -->
                       </div>
                       <!-- end row -->
@@ -374,6 +399,8 @@ const editUserFormData = reactive({
     phone: "",
     department_selected_id: "",
     leader: "",
+    badge_id: "",
+    old_badge_id: "",
     old_app_access: "",
     xyz_app_access: "",
     user_role: "",
@@ -387,6 +414,7 @@ const editUserFormData = reactive({
     phone: "",
     department: "",
     xyz_app_access_err: "",
+    badge_id_err: "",
   },
   custom_err: "",
   custom_success: "",
@@ -410,27 +438,37 @@ const updateDepartmentSelected = (selected_department) => {
 };
 
 const removeEditFormError = (focusedInput) => {
-  if (focusedInput == "first_name") {
-    if (editUserFormData.errors.first_name != "") {
-      editUserFormData.errors.first_name = "";
-    }
-  }
+  switch (focusedInput) {
+    case "first_name":
+      if (editUserFormData.errors.first_name != "") {
+        editUserFormData.errors.first_name = "";
+      }
+      break;
 
-  if (focusedInput == "last_name") {
-    if (editUserFormData.errors.last_name != "") {
-      editUserFormData.errors.last_name = "";
-    }
-  }
-  if (focusedInput == "email") {
-    if (editUserFormData.errors.email != "") {
-      editUserFormData.errors.email = "";
-    }
-  }
-  if (focusedInput == "phone") {
-    if (editUserFormData.errors.phone != "") {
-      editUserFormData.errors.phone = "";
-    }
-  }
+    case "last_name":
+      if (editUserFormData.errors.last_name != "") {
+        editUserFormData.errors.last_name = "";
+      }
+      break;
+    case "email":
+      if (editUserFormData.errors.email != "") {
+        editUserFormData.errors.email = "";
+      }
+      break;
+    case "phone":
+      if (editUserFormData.errors.phone != "") {
+        editUserFormData.errors.phone = "";
+      }
+      break;
+    case "badge_id":
+      if (editUserFormData.errors.badge_id_err != "") {
+        editUserFormData.errors.badge_id_err = "";
+      }
+      break;
+
+    default:
+      break;
+  } // end switch
 };
 
 const assignEditUserFormErrorMsg = (errorsArr) => {
@@ -447,6 +485,9 @@ const assignEditUserFormErrorMsg = (errorsArr) => {
     }
     if (error.toLowerCase().indexOf("phone") > -1) {
       editUserFormData.errors.phone = error;
+    }
+    if (error.toLowerCase().indexOf("badge") > -1) {
+      editUserFormData.errors.badge_id_err = error;
     }
   });
 };
@@ -485,6 +526,11 @@ const checkForEditUserFormErrors = () => {
       errorsArr.push("The phone number is invalid");
     }
   }
+
+  if (editUserFormData.form_data.badge_id === "") {
+    abort = true;
+    errorsArr.push("The badge id field is required");
+  }
   return {
     abort,
     errorsArr,
@@ -505,6 +551,8 @@ const updateSelectedCoworker = (selected_user) => {
   editUserFormData.form_data.xyz_app_access = selected_user.xyz_app_access;
   editUserFormData.form_data.old_app_access = selected_user.xyz_app_access;
   editUserFormData.form_data.user_role = selected_user.role;
+  editUserFormData.form_data.badge_id = selected_user.badge_id;
+  editUserFormData.form_data.old_badge_id = selected_user.badge_id;
 };
 
 const handleEditFormSubmit = async () => {

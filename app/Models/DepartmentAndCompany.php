@@ -87,10 +87,10 @@ public static function fetchDepartmentsWithCoWorkerCount(){
   
      $query = DB::table('department_and_companies')
               
-              ->select('department_and_companies.id', 'department_and_companies.name', DB::raw('count(users.department) as department_user_total'))
+              ->select('department_and_companies.id', 'department_and_companies.name', DB::raw('count(users.department_company) as department_user_total'))
               
               ->leftJoin('users', function($join) {
-                $join->on('users.department', '=', 'department_and_companies.id');
+                $join->on('users.department_company', '=', 'department_and_companies.id');
                })
               ->where('is_depart_or_comp','=', 0)
               ->groupBy('department_and_companies.id')

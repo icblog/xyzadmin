@@ -1,15 +1,15 @@
 <template>
   <Layout pageTitle="user-login" pageIntro="Login">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row pt-4">
         <div class="col-md-7 mx-auto pt-4">
           <div class="form-wrapper">
             <section v-if="processing"><LoadingIndicator /></section>
             <section v-if="!processing">
               <p class="form-top-text">
-                Enter your login details below or if you're a recruiter email me
+                Enter your login details below or email me @
                 <span class="bolded small">isaaccobbinah.live@gmail.com</span>
-                for access thank you.
+                for access if you're a recruiter thank you.
               </p>
 
               <HandleMsg

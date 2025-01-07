@@ -1,7 +1,7 @@
 <template>
   <Layout pageTitle="view-all-visitors" pageIntro="View visitors">
     <div class="container-wrapper">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <SideBar :currentlyActiveIndex="1" />
@@ -51,7 +51,7 @@
                         customClass="primary-btn ml-3"
                         :btnFunc="() => printAllOrConvertToPdf('print')"
                       >
-                        Print all
+                        <i class="fas fa-print"></i>
                       </AppButton>
                     </span>
                   </div>
@@ -123,14 +123,14 @@
                   </span>
                 </div>
                 <div class="col-md-12">
-                  <span class="small bolded">First name: </span>
+                  <span class="small bolded">First or last name: </span>
                   <span class="small">(optional)</span>
                   <div class="input-group">
                     <input
                       v-model="viewAllVisitorsData.coworkerOrVisitorFname"
                       type="text"
                       class="form-control"
-                      placeholder="First name of co-worker or visitor ...."
+                      placeholder="First or last name of co-worker or visitor ...."
                       @focus="removeErrorOnSearchForm"
                     />
                   </div>
@@ -408,7 +408,8 @@ const printAllOrConvertToPdf = (printAllOrConvertToPdfBtn) => {
     attrArr,
     viewAllVisitorsData.viewVisitorsRes,
     "Records",
-    printRecords
+    printRecords,
+    ["sign_in", "sign_out"]
   );
 };
 

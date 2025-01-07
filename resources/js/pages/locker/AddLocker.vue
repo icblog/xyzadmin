@@ -1,7 +1,7 @@
 <template>
   <Layout pageTitle="add-locker" pageIntro="Add locker">
     <div class="container-wrapper">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <SideBar :currentlyActiveIndex="5" />
@@ -88,7 +88,7 @@
                     </p>
                     <div class="pt-3 row">
                       <div class="col-md-6 mx-auto">
-                        <AppButton btnType="submit" btnStyle="primary">Submit</AppButton>
+                        <AppButton btnType="submit" btnStyle="primary" :fullBtn="true">Submit</AppButton>
                       </div>
                     </div>
                   </div>

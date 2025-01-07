@@ -212,27 +212,34 @@ export function returnSideBarData() {
         },
 
 
-        //Permits start here (index 7)
+        //Temp off site start here (index 7)
 
-        // {
-        //     name: "Permit",
-        //     links: [
-        //         {
-        //             link_name: "New permit",
-        //             link_url: "/permit/add",
-        //             component_name: "permit/addpermit",
-        //             is_ext: false,
-        //             restricted_type: "user",
-        //         },
-        //         {
-        //             link_name: "View permit",
-        //             link_url: "/permit/view-permit",
-        //             component_name: "permit/viewpermit",
-        //             is_ext: false,
-        //             restricted_type: "user",
-        //         },
-        //     ],
-        // },
+        {
+            name: "Temp offsite",
+            links: [
+                {
+                    link_name: "Current temp offsite",
+                    link_url: "/tempoffsite/current",
+                    component_name: "tempoffsite/currenttempoffsite",
+                    is_ext: false,
+                    restricted_type: "user",
+                },
+                {
+                    link_name: "View temp offsite",
+                    link_url: "/tempoffsite/view",
+                    component_name: "tempoffsite/viewtempoffsite",
+                    is_ext: false,
+                    restricted_type: "user",
+                },
+                {
+                    link_name: "Temp offsite in/out",
+                    link_url: "https://iv.icblog.uk/temp-in-out",
+                    component_name: "",
+                    is_ext: true,
+                    restricted_type: "user",
+                }
+            ],
+        },
     ];
 
     return link_data;
