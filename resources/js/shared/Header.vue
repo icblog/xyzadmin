@@ -17,7 +17,7 @@
 
   <div class="container pt-1">
     <div class="row justify-content-end pt-5 pb-3 text-center">
-      <div class="col-9">
+      <div class="col-md-12">
         <h5>{{ pageIntro }}</h5>
       </div>
     </div>
